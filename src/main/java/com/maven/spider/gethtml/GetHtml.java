@@ -17,7 +17,10 @@ public class GetHtml {
 		CloseableHttpClient httpclient = HttpClients.createDefault();
 		try {
 			// 创建get请求
-			HttpGet req = new HttpGet("http://ip.zdaye.com/");
+			HttpGet req = new HttpGet("http://www.xicidaili.com/nn/");
+			req.setHeader("User-Agent","Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:58.0) Gecko/20100101 Firefox/58.0");
+			req.setHeader("charset", "UTF-8");
+			req.setHeader("Accept","text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
 			// 发送get请求
 			CloseableHttpResponse res = httpclient.execute(req);
 			try{
