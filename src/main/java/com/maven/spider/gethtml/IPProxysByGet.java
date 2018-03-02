@@ -10,8 +10,10 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
-public class GetHtml {
 
+public class IPProxysByGet {
+	
+	
 	public void get(){
 		// 创建HttpClient对象
 		CloseableHttpClient httpclient = HttpClients.createDefault();
@@ -19,8 +21,6 @@ public class GetHtml {
 			// 创建get请求
 			HttpGet req = new HttpGet("http://www.xicidaili.com/nn/");
 			req.setHeader("User-Agent","Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:58.0) Gecko/20100101 Firefox/58.0");
-			req.setHeader("charset", "UTF-8");
-			req.setHeader("Accept","text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
 			// 发送get请求
 			CloseableHttpResponse res = httpclient.execute(req);
 			try{
@@ -28,14 +28,15 @@ public class GetHtml {
 				HttpEntity entity = res.getEntity();
 				
 				// 响应状态
-				System.out.println(res.getStatusLine());
+				System.out.println(res.getStatusLine().getStatusCode());
 				if (entity != null){
 					// 获取响应内容的长度
-					long length = entity.getContentLength(); 
-					// 获取响应的内容
-					String content = EntityUtils.toString(entity,"UTF-8");
+					//long length = entity.getContentLength(); 
 					
-					System.out.println("内容长度：" + length + "\n具体内容：\n" + content);
+					// 获取响应的内容
+					String content = EntityUtils.toString(entity);
+					
+					System.out.println("具体内容：\n" + content);
 				}
 			}finally{
 				res.close();
@@ -56,6 +57,6 @@ public class GetHtml {
 	
 	
 	public static void main (String[] args){
-		new GetHtml().get();
+		new IPProxysByGet().get();
 	}
 }
