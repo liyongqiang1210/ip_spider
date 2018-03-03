@@ -18,7 +18,7 @@ import org.apache.http.util.EntityUtils;
 public class GetHtml {
 	
 	// 浏览器请求头User-Agent
-	static final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:58.0) Gecko/20100101 Firefox/58.0";
+	final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:58.0) Gecko/20100101 Firefox/58.0";
 	// 创建HttpClient对象
 	static final CloseableHttpClient HTTP_CLIENT = HttpClients.createDefault();
 	
