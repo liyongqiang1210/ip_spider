@@ -25,7 +25,7 @@ public class ParseHtml {
 	 * @param content
 	 * @return
 	 */
-	public String getData(String content) {
+	public String getJsonData(String content) {
 		// 创建json数组对象
 		JSONArray jsonArray = new JSONArray();
 		// 将content转化为doc文档
