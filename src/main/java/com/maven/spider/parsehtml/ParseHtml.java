@@ -48,5 +48,17 @@ public class ParseHtml {
 		
 		return jsonStr;
 	}
+	
+	/**
+	 * 判断IP是否可用
+	 * @param ipAdress
+	 * @param port
+	 * @return
+	 */
+	public boolean getIPIsAvailable(String ipAdress,String port) {
+		
+		return false;
+		
+	}
 
 }
