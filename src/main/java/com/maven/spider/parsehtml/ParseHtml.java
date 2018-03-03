@@ -9,6 +9,7 @@ import org.jsoup.select.Elements;
 
 import com.alibaba.fastjson.JSONArray;
 import com.maven.spider.entity.IP;
+import com.maven.spider.gethtml.GetHtml;
 
 /**
  * 使用Jsoup解析页面
@@ -59,6 +60,11 @@ public class ParseHtml {
 		
 		return false;
 		
+	}
+	public static void main(String[] args){
+		String string = new GetHtml().get("http://www.xicidaili.com/nn/");
+		String jsonData = new ParseHtml().getJsonData(string);
+		System.out.println(jsonData);
 	}
 
 }
