@@ -28,7 +28,8 @@ import com.maven.spider.gethtml.GetHtml;
 public class ParseHtml {
 
 	// 浏览器请求头User-Agent
-		final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:58.0) Gecko/20100101 Firefox/58.0";
+	final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:58.0) Gecko/20100101 Firefox/58.0";
+
 	/**
 	 * 分析html页面获取需要的数据
 	 * 
@@ -50,66 +51,77 @@ public class ParseHtml {
 			String serverAddress = element.select("td:eq(3)").select("a").text();
 			String isAnonymous = element.select("td:eq(4)").text();
 			String type = element.select("td:eq(5)").text();
-			
+
 			IP ip = new IP(id, ipAddress, prot, serverAddress, isAnonymous, type);
-			this.getIPIsAvailable(ipAddress, prot, type);
-			jsonArray.add(ip);
+			boolean ipIsAvailable = this.getIPIsAvailable(ipAddress, prot, type);
+			
+			// 如果ip地址可用那么添加到jsonArray中
+			if(ipIsAvailable){
+				jsonArray.add(ip);
+			}
+			
 		}
 		// 将json数组转为json字符串
-		String jsonStr = jsonArray.toJSONString(); 
-		
+		String jsonStr = jsonArray.toJSONString();
+
 		return jsonStr;
 	}
+
 	/**
 	 * 判断IP是否可用
+	 * 
 	 * @param ipAdress
-	
+	 * 
 	 * @param port
 	 * @return
 	 */
-	public boolean getIPIsAvailable(String ipAddress,String prot,String type) {
+	public boolean getIPIsAvailable(String ipAddress, String prot, String type) {
+		// 创建httpClient对象
 		CloseableHttpClient httpClient = HttpClients.createDefault();
+		
 		HttpHost proxy = new HttpHost(ipAddress, Integer.valueOf(prot), type);
 		RequestConfig config = RequestConfig.custom().setProxy(proxy).build();
 		HttpGet httpGet = new HttpGet("https://www.baidu.com/");
-		httpGet.setHeader("User-Agent",USER_AGENT);
+		httpGet.setHeader("User-Agent", USER_AGENT);
 		httpGet.setConfig(config);
 		// 获取响应
 		CloseableHttpResponse response = null;
 		try {
-			
-			 response = httpClient.execute(httpGet);
-			
+
+			response = httpClient.execute(httpGet);
+
 			// 状态码
 			int statusCode = response.getStatusLine().getStatusCode();
-			if(statusCode == 200){
+			if (statusCode == 200) {
 				System.out.println(ipAddress + ":" + prot + "=========>可用");
 				return true;
 			}
-			
+
 		} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally{
-			if(response != null){
-                try {
+		} finally {
+			if (response != null) {
+				try {
 					response.close();
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-            }
-            if(httpGet != null){
-            	httpGet.abort();
-            }
+			}
+			if (httpClient != null) {
+				try {
+					httpClient.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
 		}
-		return false;
 		
+		return false;
 	}
-	public static void main(String[] args){
+
+	public static void main(String[] args) {
 		String string = new GetHtml().get("http://www.xicidaili.com/nn/");
 		String jsonData = new ParseHtml().getJsonData(string);
 		System.out.println(jsonData);
