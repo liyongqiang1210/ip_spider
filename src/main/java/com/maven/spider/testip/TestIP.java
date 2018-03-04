@@ -61,7 +61,7 @@ public class TestIP {
 			System.out.println("IOException");
 		} finally {
 			// 关闭连接,释放资源
-			try {
+			try {  
 				httpClient.close();
 			} catch (IOException e) {
 				// e.printStackTrace();
