@@ -42,7 +42,7 @@ public class GetHtml {
 
 				// 响应状态
 				int statusCode = res.getStatusLine().getStatusCode();
-				System.out.println("statusCode：" + statusCode);
+				System.out.println("请求成功！statusCode：" + statusCode);
 
 				// 如果返回200则证明请求成功
 				if (statusCode == 200) {
