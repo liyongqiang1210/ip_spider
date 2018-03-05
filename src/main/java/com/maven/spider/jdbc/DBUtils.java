@@ -90,14 +90,17 @@ public class DBUtils {
 
 			// 执行插入操作
 			execute = ps.execute();
-			System.out.println("执行的sql:" + sql);
-			if(execute){
-				System.out.println("==========>插入成功！");
-			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
+			
+			// 判断是否插入成功
+			if(execute){
+				System.out.println("==========>插入成功！");
+			}else{
+				System.out.println("==========>插入失败！");
+			}
 			// 关闭连接
 			DBUtils.close(rs, ps, conn);
 		}
