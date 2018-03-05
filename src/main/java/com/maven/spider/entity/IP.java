@@ -9,110 +9,135 @@ public class IP implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private String id;
-	private String ipAddress;
-	private String prot;
-	private String serverAddress;
-	private String isAnonymous;
-	private String type;
-	private String responseTime;
-	private String createTime;
+	private String ip_address;
+	private String ip_prot;
+	private String ip_server_address;
+	private String ip_is_anonymous;
+	private Integer ip_is_user;
+	private String ip_type;
+	private String response_time;
+	private String create_time;
+
+	
+	public Integer getIp_is_user() {
+		return ip_is_user;
+	}
+
+	public void setIp_is_user(Integer ip_is_user) {
+		this.ip_is_user = ip_is_user;
+	}
 
 	public String getId() {
 		return id;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public String getIp_address() {
+		return ip_address;
 	}
 
-	public String getIpAddress() {
-		return ipAddress;
+	public void setIp_address(String ip_address) {
+		this.ip_address = ip_address;
 	}
 
-	public void setIpAddress(String ipAddress) {
-		this.ipAddress = ipAddress;
+	public String getIp_prot() {
+		return ip_prot;
 	}
 
-	public String getProt() {
-		return prot;
+	public void setIp_prot(String ip_prot) {
+		this.ip_prot = ip_prot;
 	}
 
-	public void setProt(String prot) {
-		this.prot = prot;
+	public String getIp_server_address() {
+		return ip_server_address;
 	}
 
-	public String getServerAddress() {
-		return serverAddress;
+	public void setIp_server_address(String ip_server_address) {
+		this.ip_server_address = ip_server_address;
 	}
 
-	public void setServerAddress(String serverAddress) {
-		this.serverAddress = serverAddress;
+	public String getIp_is_anonymous() {
+		return ip_is_anonymous;
 	}
 
-	public String getIsAnonymous() {
-		return isAnonymous;
+	public void setIp_is_anonymous(String ip_is_anonymous) {
+		this.ip_is_anonymous = ip_is_anonymous;
 	}
 
-	public void setIsAnonymous(String isAnonymous) {
-		this.isAnonymous = isAnonymous;
+	public String getIp_type() {
+		return ip_type;
 	}
 
-	public String getType() {
-		return type;
+	public void setIp_type(String ip_type) {
+		this.ip_type = ip_type;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public String getResponse_time() {
+		return response_time;
 	}
 
-	public String getResponseTime() {
-		return responseTime;
+	public void setResponse_time(String response_time) {
+		this.response_time = response_time;
 	}
 
-	public void setResponseTime(String responseTime) {
-		this.responseTime = responseTime;
+	public String getCreate_time() {
+		return create_time;
 	}
 
-	public String getCreateTime() {
-		return createTime;
+	public void setCreate_time(String create_time) {
+		this.create_time = create_time;
 	}
 
-	public IP(String id, String ipAddress, String prot, String serverAddress, String isAnonymous, String type) {
-		super();
-		this.id = id;
-		this.ipAddress = ipAddress;
-		this.prot = prot;
-		this.serverAddress = serverAddress;
-		this.isAnonymous = isAnonymous;
-		this.type = type;
-	}
-
-	public void setCreateTime(String createTime) {
-		this.createTime = createTime;
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	public IP() {
 		super();
 	}
 
-	public IP(String id, String ipAddress, String prot, String serverAddress, String isAnonymous, String type,
-			String responseTime, String createTime) {
+	public IP(String id, String ip_address, String ip_prot, String ip_server_address, String ip_is_anonymous,
+			Integer ip_is_user, String ip_type, String response_time, String create_time) {
 		super();
 		this.id = id;
-		this.ipAddress = ipAddress;
-		this.prot = prot;
-		this.serverAddress = serverAddress;
-		this.isAnonymous = isAnonymous;
-		this.type = type;
-		this.responseTime = responseTime;
-		this.createTime = createTime;
+		this.ip_address = ip_address;
+		this.ip_prot = ip_prot;
+		this.ip_server_address = ip_server_address;
+		this.ip_is_anonymous = ip_is_anonymous;
+		this.ip_is_user = ip_is_user;
+		this.ip_type = ip_type;
+		this.response_time = response_time;
+		this.create_time = create_time;
+	}
+
+	public IP(String ip_address, String ip_prot, String ip_server_address, String ip_is_anonymous, Integer ip_is_user,
+			String ip_type, String response_time, String create_time) {
+		super();
+		this.ip_address = ip_address;
+		this.ip_prot = ip_prot;
+		this.ip_server_address = ip_server_address;
+		this.ip_is_anonymous = ip_is_anonymous;
+		this.ip_is_user = ip_is_user;
+		this.ip_type = ip_type;
+		this.response_time = response_time;
+		this.create_time = create_time;
+	}
+
+	
+	public IP(String ip_address, String ip_prot, String ip_server_address, String ip_is_anonymous, String ip_type) {
+		super();
+		this.ip_address = ip_address;
+		this.ip_prot = ip_prot;
+		this.ip_server_address = ip_server_address;
+		this.ip_is_anonymous = ip_is_anonymous;
+		this.ip_type = ip_type;
 	}
 
 	@Override
 	public String toString() {
-		return "{id:" + id + ", ipAddress:" + ipAddress + ", prot:" + prot + ", serverAddress:" + serverAddress
-				+ ", isAnonymous:" + isAnonymous + ", type:" + type + ", responseTime:" + responseTime + ", createTime:"
-				+ createTime + "}";
+		return "IP [id=" + id + ", ip_address=" + ip_address + ", ip_prot=" + ip_prot + ", ip_server_address="
+				+ ip_server_address + ", ip_is_anonymous=" + ip_is_anonymous + ", ip_is_user=" + ip_is_user
+				+ ", ip_type=" + ip_type + ", response_time=" + response_time + ", create_time=" + create_time + "]";
 	}
 
+	
 }
