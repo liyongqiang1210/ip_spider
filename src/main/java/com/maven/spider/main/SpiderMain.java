@@ -22,7 +22,7 @@ public class SpiderMain {
 		DBUtils db = new DBUtils();
 		TestIP test = new TestIP();
 
-		for (int i = 0; i < 2000; i++) {
+		for (int i = 1; i < 2000; i++) {
 
 			// 设置url
 			String url = "http://www.xicidaili.com/nn/" + i;
