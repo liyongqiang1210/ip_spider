@@ -13,8 +13,8 @@ import org.apache.http.impl.client.HttpClients;
 public class TestIP {
 
 	// 浏览器请求头User-Agent
-	private final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:58.0) Gecko/20100101 Firefox/58.0";
-
+	private static final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:58.0) Gecko/20100101 Firefox/58.0";
+	
 	/**
 	 * 判断IP是否可用
 	 * 
@@ -23,14 +23,14 @@ public class TestIP {
 	 * @param port
 	 * @return
 	 */
-	public boolean getIPIsAvailable(String ipAddress, String prot, String type) {
+	public boolean getIPIsAvailable(String ip_address, String ip_prot, String ip_type) {
 		// 创建httpClient对象
 		CloseableHttpClient httpClient = HttpClients.createDefault();
 
 		// 设置代理
-		HttpHost proxy = new HttpHost(ipAddress, Integer.valueOf(prot));
-		RequestConfig config = RequestConfig.custom().setConnectTimeout(5000).setProxy(proxy).build();
-		HttpGet httpGet = new HttpGet("https://www.taobao.com/");
+		HttpHost proxy = new HttpHost(ip_address, Integer.valueOf(ip_prot),ip_type);
+		RequestConfig config = RequestConfig.custom().setProxy(proxy).build();
+		HttpGet httpGet = new HttpGet("http://www.runoob.com/");
 		httpGet.setConfig(config);
 		httpGet.setHeader("User-Agent", USER_AGENT);
 
@@ -42,11 +42,8 @@ public class TestIP {
 				// 状态码
 				int statusCode = response.getStatusLine().getStatusCode();
 				if (statusCode == 200) {
-
-					// System.out.println(EntityUtils.toString(response.getEntity()));
-
-					System.out.println(ipAddress + ":" + prot + "=========>可用");
-
+					
+					System.out.println(ip_address + ":" + ip_prot + "=========>可用");
 					return true;
 				}
 			} finally {
@@ -54,18 +51,15 @@ public class TestIP {
 			}
 
 		} catch (ClientProtocolException e) {
-			System.out.println("ClientProtocolException");
-			// e.printStackTrace();
+			e.printStackTrace();
 		} catch (IOException e) {
-			// e.printStackTrace();
-			System.out.println("IOException");
+			e.printStackTrace();
 		} finally {
 			// 关闭连接,释放资源
-			try {  
+			try {
 				httpClient.close();
 			} catch (IOException e) {
-				// e.printStackTrace();
-				System.out.println("IOException");
+				e.printStackTrace();
 			}
 		}
 
