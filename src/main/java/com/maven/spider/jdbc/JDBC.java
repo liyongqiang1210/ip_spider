@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.maven.spider.entity.IP;
@@ -102,16 +103,31 @@ public class JDBC {
 	 * @return
 	 */
 	public List<IP> getIPList() {
-		String sql = "SELECT * FORM ip_list WHERE ip_is_user = 1";
+		List<IP> list = new ArrayList<IP>();
+		String sql = "SELECT * FORM ip_list WHERE ip_is_user = 1 limit 20";
 		Connection conn = DBUtils.getConnection();
 		PreparedStatement ps = null;
 
 		try {
 			ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			IP ip = null;
+			while(rs.next()){
+				ip = new IP();
+				ip.setIp_address(rs.getString("ip_address"));
+				ip.setIp_prot(rs.getString("ip_prot"));
+				ip.setIp_is_anonymous(rs.getString("ip_is_anonymous"));
+				ip.setIp_is_user(rs.getInt("ip_is_user"));
+				ip.setIp_server_address(rs.getString("ip_server_address"));
+				ip.setIp_type(rs.getString("ip_type"));
+				ip.setCreate_time(rs.getString("create_time"));
+				list.add(ip);
+			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		return null;
+		return list;
 	}
 }
