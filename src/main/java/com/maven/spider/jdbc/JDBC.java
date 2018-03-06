@@ -100,6 +100,7 @@ public class JDBC {
 
 	/**
 	 * 获取可用的ip列表
+	 * 
 	 * @return
 	 */
 	public List<IP> getIPList() {
