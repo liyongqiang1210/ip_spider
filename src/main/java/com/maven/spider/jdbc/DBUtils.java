@@ -10,36 +10,16 @@ import java.util.Date;
 
 import com.maven.spider.entity.IP;
 
-
 public class DBUtils {
 
 	public static final String URL = "jdbc:mysql://localhost:3306/maven";
 	public static final String USER = "root";
 	public static final String PASSWORD = "root";
-	private static Connection conn = null;
-	
+
 	// 获取当前日期
 	Date date = new Date();
 	SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-DD HH:mm:ss");
 	String create_time = sdf.format(date);
-	
-	static {
-		try {
-			// 1.加载驱动程序
-			Class.forName("com.mysql.jdbc.Driver");
-			// 2. 获得数据库连接
-			conn = DriverManager.getConnection(URL, USER, PASSWORD);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	// 获取连接
-	public static Connection getConnection() {
-		return conn;
-	}
 
 	// 关闭连接的方法
 	public static void close(ResultSet rs, PreparedStatement ps, Connection conn) {
@@ -66,6 +46,17 @@ public class DBUtils {
 	 * @param ip
 	 */
 	public void insertIP(IP ip) {
+		Connection conn = null;
+		try {
+			// 1.加载驱动程序
+			Class.forName("com.mysql.jdbc.Driver");
+			// 2. 获得数据库连接
+			conn = DriverManager.getConnection(URL, USER, PASSWORD);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 		String sql = "INSERT INTO ip_list(id,ip_address,ip_prot,ip_type,ip_server_address,ip_is_user,ip_is_anonymous,create_time)"
 				+ " values (?,?,?,?,?,?,?,?)";
@@ -75,7 +66,7 @@ public class DBUtils {
 
 		// 创建查询结果集对象
 		ResultSet rs = null;
-		
+
 		boolean execute = false;
 		try {
 			ps = conn.prepareStatement(sql);
@@ -94,27 +85,17 @@ public class DBUtils {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			
+
 			// 判断是否插入成功
-			if(execute){
+			if (execute) {
 				System.out.println("==========>插入成功！");
-			}else{
+			} else {
 				System.out.println("==========>插入失败！");
 			}
 			// 关闭连接
 			DBUtils.close(rs, ps, conn);
 		}
-		
+
 	}
-	
-//	public static void main(String[] args) {
-//		IP ip = new IP();
-//		ip.setIp_type("http");
-//		ip.setIp_address("120.0.0.1");
-//		ip.setIp_is_anonymous("高匿");
-//		ip.setIp_is_user(0);
-//		ip.setIp_prot("80");
-//		ip.setIp_server_address("河北");
-//		new DBUtils().insertIP(ip);
-//	}
+
 }

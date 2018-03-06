@@ -16,13 +16,13 @@ import com.maven.spider.testip.TestIP;
  */
 public class SpiderMain {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		GetHtml gh = new GetHtml();
 		ParseHtml ph = new ParseHtml();
 		DBUtils db = new DBUtils();
 		TestIP test = new TestIP();
 
-		for (int i = 1; i < 2000; i++) {
+		for (int i = 1; i < 20; i++) {
 
 			// 设置url
 			String url = "http://www.xicidaili.com/nn/" + i;
@@ -30,6 +30,7 @@ public class SpiderMain {
 			String content = gh.get(url);
 			// 获取json格式的ip数据列表
 			List<IP> list = ph.getIPList(content);
+			System.out.println(list);
 			for(IP ip:list){
 				String ip_address = ip.getIp_address();
 				String ip_prot = ip.getIp_prot();
@@ -46,7 +47,7 @@ public class SpiderMain {
 				}
 				
 				// 插入数据库
-				db.insertIP(ip);
+//				db.insertIP(ip);
 				
 			}
 		}
