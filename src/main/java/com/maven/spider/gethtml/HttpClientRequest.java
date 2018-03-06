@@ -11,12 +11,12 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
 /**
- * 获取网页内容
+ * 模拟浏览器获取网页信息
  * 
  * @author Li Yongqiang
  *
  */
-public class GetHtml {
+public class HttpClientRequest {
 
 	// 浏览器请求头User-Agent
 	final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:58.0) Gecko/20100101 Firefox/58.0";
@@ -29,7 +29,7 @@ public class GetHtml {
 	 */
 	public String get(String url) {
 		// 创建HttpClient对象
-		CloseableHttpClient HTTP_CLIENT = HttpClients.createDefault();
+		CloseableHttpClient httpClient = HttpClients.createDefault();
 		// 响应的内容
 		String content = null;
 		try {
@@ -37,17 +37,18 @@ public class GetHtml {
 			HttpGet req = new HttpGet(url);
 			req.setHeader("User-Agent", USER_AGENT);
 			// 发送get请求
-			CloseableHttpResponse res = HTTP_CLIENT.execute(req);
+			CloseableHttpResponse res = httpClient.execute(req);
 			try {
 				// 获取响应实体
 				HttpEntity entity = res.getEntity();
 
 				// 响应状态
 				int statusCode = res.getStatusLine().getStatusCode();
-				System.out.println("请求成功！statusCode：" + statusCode);
+				System.out.println("Code：" + statusCode);
 
 				// 如果返回200则证明请求成功
 				if (statusCode == 200) {
+					// 获取网页内容
 					content = EntityUtils.toString(entity);
 				}
 			} finally {
@@ -60,7 +61,7 @@ public class GetHtml {
 		} finally {
 			// 关闭链接，释放资源
 			try {
-				HTTP_CLIENT.close();
+				httpClient.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
