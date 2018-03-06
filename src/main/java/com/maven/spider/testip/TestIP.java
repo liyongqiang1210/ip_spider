@@ -29,9 +29,9 @@ public class TestIP {
 		// 设置代理IP、端口、协议（请分别替换）
 		HttpHost proxy = new HttpHost(ip_address, Integer.valueOf(ip_prot), ip_type);
 		// 把代理设置到请求配置
-		RequestConfig defaultRequestConfig = RequestConfig.custom().setConnectTimeout(5000)
-				.setConnectionRequestTimeout(1000)
-				.setSocketTimeout(5000)
+		RequestConfig defaultRequestConfig = RequestConfig.custom().setConnectTimeout(2000)
+				.setConnectionRequestTimeout(100)
+				.setSocketTimeout(2000)
 				.setProxy(proxy).build();
 		// 实例化CloseableHttpClient对象
 		CloseableHttpClient httpClient = HttpClients.custom().setDefaultRequestConfig(defaultRequestConfig).build();
