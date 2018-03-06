@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import com.maven.spider.entity.IP;
 import com.maven.spider.utils.DBUtils;
@@ -29,7 +30,7 @@ public class JDBC {
 		// 创建查询结果集对象
 		ResultSet rs = null;
 
-		boolean execute = false;
+		int execute = 0;
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, null);
@@ -45,15 +46,13 @@ public class JDBC {
 			boolean ipIsExist = this.getIPIsExist(ip.getIp_address(), ip.getIp_prot());
 			if (!ipIsExist) { // 如果不存在此条数据则执行插入操作
 				// 执行插入操作
-				execute = ps.execute();
-				if (execute) {
+				execute = ps.executeUpdate();
+				if (execute == 1) {
 					System.out.println(ip.getIp_address() + ":" + ip.getIp_prot() + "=========>此条ip信息插入成功！");
 				} else {
 					System.out.println(ip.getIp_address() + ":" + ip.getIp_prot() + "=========>此条ip信息插入失败！");
 				}
 
-			} else {
-				System.out.println(ip.getIp_address() + ":" + ip.getIp_prot() + "=========>此条ip信息已经存在！");
 			}
 
 		} catch (SQLException e) {
@@ -75,7 +74,7 @@ public class JDBC {
 	public boolean getIPIsExist(String ip_address, String ip_prot) {
 
 		// sql语句
-		String sql = "SELECT COUNT(id) FROM ip_list WHERE ip_address = ? AND ip_prot = ?";
+		String sql = "SELECT * FROM ip_list WHERE ip_address = ? AND ip_prot = ?";
 		// 获取数据库连接
 		Connection conn = DBUtils.getConnection();
 		// 创建预编译对象
@@ -84,15 +83,35 @@ public class JDBC {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, ip_address);
 			ps.setString(2, ip_prot);
+			System.out.println("执行的sql: " + ps.toString());
 			// 获取查询结果集
 			ResultSet rs = ps.executeQuery();
 			// 判断是否查询到数据
 			if (rs.next()) { // 如果查询到数据那么返回true
+				System.out.println(ip_address + ":" + ip_prot + "=========>此条信息已经存在！");
 				return true;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return false;
+	}
+
+	/**
+	 * 获取可用的ip列表
+	 * @return
+	 */
+	public List<IP> getIPList() {
+		String sql = "SELECT * FORM ip_list WHERE ip_is_user = 1";
+		Connection conn = DBUtils.getConnection();
+		PreparedStatement ps = null;
+
+		try {
+			ps = conn.prepareStatement(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return null;
 	}
 }
