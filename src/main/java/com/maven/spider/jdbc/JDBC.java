@@ -105,7 +105,7 @@ public class JDBC {
 	 */
 	public List<IP> getIPList() {
 		List<IP> list = new ArrayList<IP>();
-		String sql = "SELECT * FORM ip_list WHERE ip_is_user = 1 limit 20";
+		String sql = "SELECT * FROM ip_list WHERE ip_is_user = 1 LIMIT 20";
 		Connection conn = DBUtils.getConnection();
 		PreparedStatement ps = null;
 
