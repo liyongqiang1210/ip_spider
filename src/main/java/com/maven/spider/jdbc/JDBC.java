@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.maven.spider.entity.IP;
-import com.maven.spider.utils.DBUtils;
-import com.maven.spider.utils.DateUtils;
+import com.maven.spider.util.DBUtil;
+import com.maven.spider.util.DateUtil;
 
 public class JDBC {
 
@@ -20,7 +20,7 @@ public class JDBC {
 	 */
 	public void insertIP(IP ip) {
 
-		Connection conn = DBUtils.getConnection();
+		Connection conn = DBUtil.getConnection();
 
 		String sql = "INSERT INTO ip_list(id,ip_address,ip_prot,ip_type,ip_server_address,ip_is_user,ip_is_anonymous,create_time)"
 				+ " values (?,?,?,?,?,?,?,?)";
@@ -41,7 +41,7 @@ public class JDBC {
 			ps.setString(5, ip.getIp_server_address());
 			ps.setInt(6, ip.getIp_is_user());
 			ps.setString(7, ip.getIp_is_anonymous());
-			ps.setString(8, DateUtils.getYMDHMS());
+			ps.setString(8, DateUtil.getYMDHMS());
 
 			// 查询数据库是否存在此条数据
 			boolean ipIsExist = this.getIPIsExist(ip.getIp_address(), ip.getIp_prot());
@@ -61,7 +61,7 @@ public class JDBC {
 		} finally {
 
 			// 关闭连接
-			DBUtils.close(rs, ps, conn);
+			DBUtil.close(rs, ps, conn);
 		}
 
 	}
@@ -77,7 +77,7 @@ public class JDBC {
 		// sql语句
 		String sql = "SELECT * FROM ip_list WHERE ip_address = ? AND ip_prot = ?";
 		// 获取数据库连接
-		Connection conn = DBUtils.getConnection();
+		Connection conn = DBUtil.getConnection();
 		// 创建预编译对象
 		PreparedStatement ps = null;
 		try {
@@ -106,7 +106,7 @@ public class JDBC {
 	public List<IP> getIPList() {
 		List<IP> list = new ArrayList<IP>();
 		String sql = "SELECT * FROM ip_list WHERE ip_is_user = 1 LIMIT 20";
-		Connection conn = DBUtils.getConnection();
+		Connection conn = DBUtil.getConnection();
 		PreparedStatement ps = null;
 
 		try {
