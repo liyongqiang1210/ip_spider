@@ -16,7 +16,7 @@ public class TimerUtil {
 	public static void main(String[] args){
 		
 		// 启动后延迟时间
-		long afterSs = 10*1000;
+		long afterSs = 1*1000;
 		// 执行周期
 		long intervalSsl = 1*1000;
 		timer.schedule(new TimerTask() {
@@ -24,7 +24,7 @@ public class TimerUtil {
 			int i = 0;
 			@Override
 			public void run() {
-				System.out.println("定时器执行次数：" + i++);
+				System.out.println("当前时间：" + DateUtil.getYMDHMS() + "定时器执行次数：" + i++);
 			}
 		}, afterSs,intervalSsl);
 	}
