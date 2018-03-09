@@ -1,9 +1,9 @@
-package com.maven.spider.utils;
+package com.maven.spider.util;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class DateUtils {
+public class DateUtil {
 
 	private static final Date DATE = new Date();
 

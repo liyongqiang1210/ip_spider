@@ -1,4 +1,4 @@
-package com.maven.spider.utils;
+package com.maven.spider.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,7 +11,7 @@ import java.sql.SQLException;
  * @author Li Yongqiang
  *
  */
-public class DBUtils {
+public class DBUtil {
 
 	public static final String URL = "jdbc:mysql://localhost:3306/maven";
 	public static final String USER = "root";
