@@ -13,19 +13,12 @@ public class TestListener {
 class MyPersonListener implements PersonListener{
 
 	public void dorun(Even even) {
-		
+		Person p = even.getPerson();
+		System.out.println("人在跑之前执行的动作");
 	}
 
 	public void doeat(Even even) {
-		
+		System.out.println("人在吃之前执行的动作");
 	}
 
-//    public void dorun(Even even) {
-//　　　　　 Person person = even.getPerson();//拿到事件源
-//        System.out.println("人在跑之前执行的动作");
-//    }
-//
-//    public void doeat(Even even) {
-//        System.out.println("人在吃之前执行的动作");
-//    }
 }
