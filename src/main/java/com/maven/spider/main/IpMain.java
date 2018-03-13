@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.maven.spider.entity.IP;
 import com.maven.spider.httpclient.HttpClientRequest;
-import com.maven.spider.jdbc.JDBC;
+import com.maven.spider.jdbc.IpJdbc;
 import com.maven.spider.parser.ParserIP;
 import com.maven.spider.testip.TestIP;
 
@@ -19,7 +19,7 @@ public class IpMain {
 	public static void main(String[] args) throws InterruptedException {
 		HttpClientRequest gh = new HttpClientRequest();
 		ParserIP ph = new ParserIP();
-		JDBC db = new JDBC();
+		IpJdbc db = new IpJdbc();
 		TestIP test = new TestIP();
 
 		for (int i = 1; i < 2000; i++) {
