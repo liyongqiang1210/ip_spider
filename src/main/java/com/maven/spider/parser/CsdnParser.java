@@ -16,7 +16,7 @@ import com.maven.spider.entity.CSDN;
  * @author Li Yongqiang
  *
  */
-public class ParserCsdn {
+public class CsdnParser {
 
 	private static final String source = "CSDN";
 
@@ -31,7 +31,7 @@ public class ParserCsdn {
 		List<CSDN> list = new ArrayList<CSDN>();
 		// 将网页内容转换成doc格式
 		Document doc = Jsoup.parse(content);
-		Elements elements = doc.select("li.clearfix");
+		Elements elements = doc.select("ul.feedlist_mod>li.clearfix");
 		for (Element element : elements) {
 			String title = element.select("div.title>h2>a").text();// 获取文章标题
 			String url = element.select("div.title>h2>a").attr("href");// 获取文章标题
