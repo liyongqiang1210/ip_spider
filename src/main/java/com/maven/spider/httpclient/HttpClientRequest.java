@@ -1,4 +1,4 @@
-package com.maven.spider.gethtml;
+package com.maven.spider.httpclient;
 
 import java.io.IOException;
 

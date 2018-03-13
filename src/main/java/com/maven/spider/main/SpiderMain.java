@@ -3,9 +3,9 @@ package com.maven.spider.main;
 import java.util.List;
 
 import com.maven.spider.entity.IP;
-import com.maven.spider.gethtml.HttpClientRequest;
+import com.maven.spider.httpclient.HttpClientRequest;
 import com.maven.spider.jdbc.JDBC;
-import com.maven.spider.parsehtml.ParseHtml;
+import com.maven.spider.parser.ParseHtml;
 import com.maven.spider.testip.TestIP;
 
 /**
