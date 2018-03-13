@@ -1,4 +1,4 @@
-package com.maven.spider.parsehtml;
+package com.maven.spider.parser;
 
 import java.util.ArrayList;
 import java.util.List;
