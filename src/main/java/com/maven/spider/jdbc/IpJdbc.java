@@ -11,7 +11,7 @@ import com.maven.spider.entity.IP;
 import com.maven.spider.util.DBUtil;
 import com.maven.spider.util.DateUtil;
 
-public class JDBC {
+public class IpJdbc {
 
 	/**
 	 * 添加ip方法
@@ -80,13 +80,15 @@ public class JDBC {
 		Connection conn = DBUtil.getConnection();
 		// 创建预编译对象
 		PreparedStatement ps = null;
+		// 创建查询结果集对象
+		ResultSet rs = null;
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, ip_address);
 			ps.setString(2, ip_prot);
 			System.out.println("执行的sql: " + ps.toString());
 			// 获取查询结果集
-			ResultSet rs = ps.executeQuery();
+			rs = ps.executeQuery();
 			// 判断是否查询到数据
 			if (rs.next()) { // 如果查询到数据那么返回true
 				System.out.println(ip_address + ":" + ip_prot + "=========>此条信息已经存在！");
@@ -94,6 +96,8 @@ public class JDBC {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally{
+			DBUtil.close(rs, ps, conn);
 		}
 		return false;
 	}
@@ -108,10 +112,10 @@ public class JDBC {
 		String sql = "SELECT * FROM ip_list WHERE ip_is_user = 1 LIMIT 20";
 		Connection conn = DBUtil.getConnection();
 		PreparedStatement ps = null;
-
+		ResultSet rs = null;
 		try {
 			ps = conn.prepareStatement(sql);
-			ResultSet rs = ps.executeQuery();
+			rs = ps.executeQuery();
 			IP ip = null;
 			while(rs.next()){
 				ip = new IP();
@@ -127,6 +131,8 @@ public class JDBC {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally{
+			DBUtil.close(rs, ps, conn);
 		}
 
 		return list;
