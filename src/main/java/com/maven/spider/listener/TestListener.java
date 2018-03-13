@@ -13,6 +13,7 @@ public class TestListener {
 class MyPersonListener implements PersonListener{
 
 	public void dorun(Even even) {
+		@SuppressWarnings("unused")
 		Person p = even.getPerson();
 		System.out.println("人在跑之前执行的动作");
 	}
