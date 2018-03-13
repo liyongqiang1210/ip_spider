@@ -56,7 +56,7 @@ public class CsdnJdbc {
 	 */
 	public static boolean selectCsdn(String url){
 		Connection conn = DBUtil.getConnection();
-		String sql = "select count(id) from article_list where url = ?";
+		String sql = "select * from article_list where url = ?";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
@@ -65,6 +65,7 @@ public class CsdnJdbc {
 			rs = ps.executeQuery();
 			if(rs.next()){// 已存在
 				System.out.println(url + "===========>已存在，添加失败!");
+				System.out.println(ps.toString());
 				return false;
 			}else{// 不存在
 				return true;
