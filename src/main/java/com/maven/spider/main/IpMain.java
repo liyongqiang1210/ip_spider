@@ -5,7 +5,7 @@ import java.util.List;
 import com.maven.spider.entity.IP;
 import com.maven.spider.httpclient.HttpClientRequest;
 import com.maven.spider.jdbc.JDBC;
-import com.maven.spider.parser.ParseHtml;
+import com.maven.spider.parser.ParserIP;
 import com.maven.spider.testip.TestIP;
 
 /**
@@ -14,11 +14,11 @@ import com.maven.spider.testip.TestIP;
  * @author liyongqiang
  *
  */
-public class SpiderMain {
+public class IpMain {
 
 	public static void main(String[] args) throws InterruptedException {
 		HttpClientRequest gh = new HttpClientRequest();
-		ParseHtml ph = new ParseHtml();
+		ParserIP ph = new ParserIP();
 		JDBC db = new JDBC();
 		TestIP test = new TestIP();
 
@@ -47,7 +47,7 @@ public class SpiderMain {
 					System.out.println(ip_address + "===========>不可用！");
 				}
 
-			}
+	 		}
 		}
 	}
 }
