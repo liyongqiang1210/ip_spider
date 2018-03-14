@@ -13,7 +13,10 @@ import java.sql.SQLException;
  */
 public class DBUtil {
 
-	public static final String URL = "jdbc:mysql://localhost:3306/maven";
+	// 本地
+	//public static final String URL = "jdbc:mysql://localhost:3306/maven";
+	// 阿里云
+	public static final String URL = "jdbc:mysql://39.106.154.2:3306/maven";
 	public static final String USER = "root";
 	public static final String PASSWORD = "root";
 
