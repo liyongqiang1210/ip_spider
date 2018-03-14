@@ -63,7 +63,7 @@ public class CsdnJdbc {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, url);
 			rs = ps.executeQuery();
-			if(rs.next()){// 已存在
+			if(rs.next()){// 已存在 
 				System.out.println(url + "===========>已存在，添加失败!");
 				return false;
 			}else{// 不存在
