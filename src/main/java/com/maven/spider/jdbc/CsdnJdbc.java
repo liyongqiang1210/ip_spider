@@ -71,6 +71,8 @@ public class CsdnJdbc {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally{
+			DBUtil.close(rs, ps, conn);
 		}
 		return false;
 	}
