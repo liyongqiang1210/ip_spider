@@ -21,7 +21,7 @@ public class CsdnMain {
 		// 启动后延迟时间
 		long afterSs = 1 * 1000;
 		// 执行周期
-		long intervalSsl = 1 * 10000;
+		long intervalSsl = 1 * 30000;
 		timer.schedule(new TimerTask() {
 			// 执行次数计数器
 			int i = 0;
