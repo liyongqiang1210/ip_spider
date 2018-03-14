@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.maven.spider.entity.CSDN;
+import com.maven.spider.entity.Csdn;
 import com.maven.spider.util.DBUtil;
 
 /**
@@ -20,7 +20,7 @@ public class CsdnJdbc {
 	 * @param csdn
 	 * @return
 	 */
-	public static boolean insertCsdn(CSDN csdn){
+	public static boolean insertCsdn(Csdn csdn){
 		Connection conn = DBUtil.getConnection();
 		String sql = "insert into article_list(url,title,author,create_time,source,article_type)values(?,?,?,?,?,?)";
 		// 创建预编译对象

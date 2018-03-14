@@ -2,7 +2,7 @@ package com.maven.spider.main;
 
 import java.util.List;
 
-import com.maven.spider.entity.IP;
+import com.maven.spider.entity.Ip;
 import com.maven.spider.httpclient.HttpClientRequest;
 import com.maven.spider.jdbc.IpJdbc;
 import com.maven.spider.parser.IpParser;
@@ -29,8 +29,8 @@ public class IpMain {
 			// 获取网页内容
 			String content = gh.get(url);
 			// 获取json格式的ip数据列表
-			List<IP> list = ph.getIPList(content);
-			for (IP ip : list) {
+			List<Ip> list = ph.getIPList(content);
+			for (Ip ip : list) {
 				String ip_address = ip.getIp_address();
 				String ip_prot = ip.getIp_prot();
 				String ip_type = ip.getIp_type();

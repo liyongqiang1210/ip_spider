@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import com.maven.spider.entity.CSDN;
+import com.maven.spider.entity.Csdn;
 import com.maven.spider.httpclient.HttpClientRequest;
 import com.maven.spider.jdbc.CsdnJdbc;
 import com.maven.spider.parser.CsdnParser;
@@ -21,7 +21,7 @@ public class CsdnMain {
 		// 启动后延迟时间
 		long afterSs = 1 * 1000;
 		// 执行周期
-		long intervalSsl = 1 * 30000;
+		long intervalSsl = 3 * 60000;
 		timer.schedule(new TimerTask() {
 			// 执行次数计数器
 			int i = 0;
@@ -30,8 +30,8 @@ public class CsdnMain {
 			public void run() {
 				System.out.println("当前时间：" + DateUtil.getYMDHMS() + "定时器执行次数：" + i++);
 				String content = hcq.get("https://www.csdn.net/nav/newarticles");
-				List<CSDN> csdnArcitleList = CsdnParser.getCsdnArcitleList(content, "最新文章");
-				for (CSDN csdn : csdnArcitleList) {
+				List<Csdn> csdnArcitleList = CsdnParser.getCsdnArcitleList(content, "最新文章");
+				for (Csdn csdn : csdnArcitleList) {
 					String url = csdn.getUrl();
 					boolean selectCsdn = CsdnJdbc.selectCsdn(url);
 					if (selectCsdn) {
