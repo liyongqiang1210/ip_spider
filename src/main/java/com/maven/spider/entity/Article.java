@@ -7,7 +7,7 @@ import java.io.Serializable;
  * @author Li Yongqiang
  *
  */
-public class Arcitle implements Serializable {
+public class Article implements Serializable {
 
 	/**
 	 * 
@@ -22,11 +22,11 @@ public class Arcitle implements Serializable {
 	private String articleType;
 	private int isDelete;
 
-	public Arcitle() {
+	public Article() {
 		super();
 	}
 
-	public Arcitle(String url, String title, String author, String createTime, String source, String articleType) {
+	public Article(String url, String title, String author, String createTime, String source, String articleType) {
 		super();
 		this.url = url;
 		this.title = title;
@@ -37,7 +37,7 @@ public class Arcitle implements Serializable {
 	}
 
 
-	public Arcitle(int id, String url, String title, String author, String createTime, String source, String articleType,
+	public Article(int id, String url, String title, String author, String createTime, String source, String articleType,
 			int isDelete) {
 		super();
 		this.id = id;
