@@ -21,7 +21,7 @@ public class ArticleParser {
 	private static final List<Article> list = new ArrayList<Article>();
 
 	/**
-	 * 获取csdn文章列表的方法
+	 * 获取csdn文章url列表的方法
 	 * 
 	 * @param content
 	 * @param articleType
@@ -46,6 +46,14 @@ public class ArticleParser {
 		return list;
 	}
 
+	/**
+	 * 获取博客园文章url列表的方法
+	 * 
+	 * @param content
+	 * @param articleType
+	 * @param source
+	 * @return
+	 */
 	public static List<Article> getCnblogsList(String content, String articleType, String source) {
 
 		Document doc = Jsoup.parse(content);
