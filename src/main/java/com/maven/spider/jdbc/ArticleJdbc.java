@@ -20,7 +20,7 @@ public class ArticleJdbc {
 	 * @param article
 	 * @return
 	 */
-	public static boolean insertCsdn(Article article){
+	public static boolean insertArticle(Article article){
 		Connection conn = DBUtil.getConnection();
 		String sql = "insert into article_url_list(url,title,author,create_time,source,article_type)values(?,?,?,?,?,?)";
 		// 创建预编译对象
@@ -54,7 +54,7 @@ public class ArticleJdbc {
 	 * @param url
 	 * @return
 	 */
-	public static boolean selectCsdn(String url){
+	public static boolean selectArticle(String url){
 		Connection conn = DBUtil.getConnection();
 		String sql = "select * from article_url_list where url = ?";
 		PreparedStatement ps = null;
