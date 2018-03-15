@@ -5,24 +5,24 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.maven.spider.entity.Csdn;
+import com.maven.spider.entity.Arcitle;
 import com.maven.spider.util.DBUtil;
 
 /**
- * csdnDB类
+ * 技术博客url DB类
  * @author Li Yongqiang
  *
  */
-public class CsdnJdbc {
+public class ArticleJdbc {
 
 	/**
-	 * 添加csdn方法
+	 * 添加博客url方法
 	 * @param csdn
 	 * @return
 	 */
-	public static boolean insertCsdn(Csdn csdn){
+	public static boolean insertCsdn(Arcitle csdn){
 		Connection conn = DBUtil.getConnection();
-		String sql = "insert into article_list(url,title,author,create_time,source,article_type)values(?,?,?,?,?,?)";
+		String sql = "insert into article_url_list(url,title,author,create_time,source,article_type)values(?,?,?,?,?,?)";
 		// 创建预编译对象
 		PreparedStatement ps = null;
 		try {
@@ -50,13 +50,13 @@ public class CsdnJdbc {
 	}
 	
 	/**
-	 * 根据url查询csdn是否存在
+	 * 根据url查询是否存在此条记录
 	 * @param url
 	 * @return
 	 */
 	public static boolean selectCsdn(String url){
 		Connection conn = DBUtil.getConnection();
-		String sql = "select * from article_list where url = ?";
+		String sql = "select * from article_url_list where url = ?";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
