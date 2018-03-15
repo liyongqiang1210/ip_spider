@@ -33,9 +33,11 @@ public class CsdnMain {
 				List<Csdn> csdnArcitleList = CsdnParser.getCsdnArcitleList(content, "最新文章");
 				for (Csdn csdn : csdnArcitleList) {
 					String url = csdn.getUrl();
-					boolean selectCsdn = CsdnJdbc.selectCsdn(url);
-					if (selectCsdn) {
-						CsdnJdbc.insertCsdn(csdn);
+					if(url != null && url != "") {
+						boolean selectCsdn = CsdnJdbc.selectCsdn(url);
+						if (selectCsdn) {
+							CsdnJdbc.insertCsdn(csdn);
+						}
 					}
 				}
 			}
