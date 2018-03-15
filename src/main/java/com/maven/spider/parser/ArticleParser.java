@@ -10,6 +10,7 @@ import org.jsoup.select.Elements;
 
 import com.maven.spider.entity.Article;
 
+
 /**
  * 技术博客文章解析器
  * 
@@ -63,13 +64,14 @@ public class ArticleParser {
 			String title = element.select("h3>a.titlelnk").text();// 获取文章标题
 			String url = element.select("h3>a").attr("href");// 获取文章标题
 			String author = element.select("a.lightblue").text();// 获取文章作者
-			String createTime = element.select("div.post_item_foot").text();// 获取文章创建时间
+			String ct = element.select("div.post_item_foot").text();// 获取文章创建时间
+			String createTime = ct.substring(ct.indexOf("于") + 2, ct.indexOf("评") - 1);// 截取我们需要的内容
 
-			// 创建csdn对象
-			Article csdn = new Article(url, title, author, createTime, source, articleType);
-			list.add(csdn); 
-			
+			// 创建cnblogs对象
+			Article cnblogs = new Article(url, title, author, createTime, source, articleType);
+			list.add(cnblogs); 
 		}
+		
 		return list;
 
 	}
