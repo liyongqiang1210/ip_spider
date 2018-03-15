@@ -2,7 +2,12 @@ package com.maven.spider.entity;
 
 import java.io.Serializable;
 
-public class Csdn implements Serializable {
+/**
+ * 技术博客实体类
+ * @author Li Yongqiang
+ *
+ */
+public class Arcitle implements Serializable {
 
 	/**
 	 * 
@@ -17,11 +22,11 @@ public class Csdn implements Serializable {
 	private String articleType;
 	private int isDelete;
 
-	public Csdn() {
+	public Arcitle() {
 		super();
 	}
 
-	public Csdn(String url, String title, String author, String createTime, String source, String articleType) {
+	public Arcitle(String url, String title, String author, String createTime, String source, String articleType) {
 		super();
 		this.url = url;
 		this.title = title;
@@ -32,7 +37,7 @@ public class Csdn implements Serializable {
 	}
 
 
-	public Csdn(int id, String url, String title, String author, String createTime, String source, String articleType,
+	public Arcitle(int id, String url, String title, String author, String createTime, String source, String articleType,
 			int isDelete) {
 		super();
 		this.id = id;
