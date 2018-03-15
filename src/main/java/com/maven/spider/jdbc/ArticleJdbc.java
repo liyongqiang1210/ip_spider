@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.maven.spider.entity.Arcitle;
+import com.maven.spider.entity.Article;
 import com.maven.spider.util.DBUtil;
 
 /**
@@ -17,29 +17,29 @@ public class ArticleJdbc {
 
 	/**
 	 * 添加博客url方法
-	 * @param csdn
+	 * @param article
 	 * @return
 	 */
-	public static boolean insertCsdn(Arcitle csdn){
+	public static boolean insertCsdn(Article article){
 		Connection conn = DBUtil.getConnection();
 		String sql = "insert into article_url_list(url,title,author,create_time,source,article_type)values(?,?,?,?,?,?)";
 		// 创建预编译对象
 		PreparedStatement ps = null;
 		try {
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, csdn.getUrl());
-			ps.setString(2, csdn.getTitle());
-			ps.setString(3, csdn.getAuthor());
-			ps.setString(4, csdn.getCreateTime());
-			ps.setString(5, csdn.getSource());
-			ps.setString(6, csdn.getArticleType());
+			ps.setString(1, article.getUrl());
+			ps.setString(2, article.getTitle());
+			ps.setString(3, article.getAuthor());
+			ps.setString(4, article.getCreateTime());
+			ps.setString(5, article.getSource());
+			ps.setString(6, article.getArticleType());
 			
 			int executeUpdate = ps.executeUpdate();
 			if(executeUpdate == 1){
-				System.out.println(csdn.getUrl()+"=========>添加成功！");
+				System.out.println(article.getUrl()+"=========>添加成功！");
 				return true;
 			}
-			System.out.println(csdn.getUrl()+"=========>添加失败！");
+			System.out.println(article.getUrl()+"=========>添加失败！");
 			return false;
 		} catch (SQLException e) {
 			e.printStackTrace();
