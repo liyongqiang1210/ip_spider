@@ -7,7 +7,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import com.maven.spider.entity.IP;
+import com.maven.spider.entity.Ip;
 
 /**
  * 使用Jsoup解析页面
@@ -24,10 +24,10 @@ public class IpParser {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<IP> getIPList(String content) {
+	public List<Ip> getIPList(String content) {
 
 		// 创建list集合用来存储ip对象
-		List<IP> list = new ArrayList<IP>();
+		List<Ip> list = new ArrayList<Ip>();
 		// 将content转化为doc文档
 		Document doc = Jsoup.parse(content);
 		// 获取高匿的ip地址
@@ -43,7 +43,7 @@ public class IpParser {
 			String ip_type = element.select("td:eq(5)").text();
 			
 			// 创建带参数的ip对象
-			IP ip = new IP(ip_address, ip_prot, ip_server_address, ip_is_anonymous, ip_type);
+			Ip ip = new Ip(ip_address, ip_prot, ip_server_address, ip_is_anonymous, ip_type);
 			list.add(ip);
 		}
 		

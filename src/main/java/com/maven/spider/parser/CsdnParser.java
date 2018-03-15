@@ -8,7 +8,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import com.maven.spider.entity.CSDN;
+import com.maven.spider.entity.Csdn;
 
 /**
  * csdn解析器
@@ -27,8 +27,8 @@ public class CsdnParser {
 	 * @param articleType
 	 * @return
 	 */
-	public static List<CSDN> getCsdnArcitleList(String content, String articleType) {
-		List<CSDN> list = new ArrayList<CSDN>();
+	public static List<Csdn> getCsdnArcitleList(String content, String articleType) {
+		List<Csdn> list = new ArrayList<Csdn>();
 		// 将网页内容转换成doc格式
 		Document doc = Jsoup.parse(content);
 		Elements elements = doc.select("ul.feedlist_mod>li.clearfix");
@@ -39,7 +39,7 @@ public class CsdnParser {
 			String createTime = element.select("dd.time").text();// 获取文章创建时间
 
 			// 创建csdn对象
-			CSDN csdn = new CSDN(url, title, author, createTime, source, articleType);
+			Csdn csdn = new Csdn(url, title, author, createTime, source, articleType);
 			list.add(csdn);
 		}
 		

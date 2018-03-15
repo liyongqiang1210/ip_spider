@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.maven.spider.entity.IP;
+import com.maven.spider.entity.Ip;
 import com.maven.spider.util.DBUtil;
 import com.maven.spider.util.DateUtil;
 
@@ -18,7 +18,7 @@ public class IpJdbc {
 	 * 
 	 * @param ip
 	 */
-	public void insertIP(IP ip) {
+	public void insertIP(Ip ip) {
 
 		Connection conn = DBUtil.getConnection();
 
@@ -107,8 +107,8 @@ public class IpJdbc {
 	 * 
 	 * @return
 	 */
-	public List<IP> getIPList() {
-		List<IP> list = new ArrayList<IP>();
+	public List<Ip> getIPList() {
+		List<Ip> list = new ArrayList<Ip>();
 		String sql = "SELECT * FROM ip_list WHERE ip_is_user = 1 LIMIT 20";
 		Connection conn = DBUtil.getConnection();
 		PreparedStatement ps = null;
@@ -116,9 +116,9 @@ public class IpJdbc {
 		try {
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
-			IP ip = null;
+			Ip ip = null;
 			while(rs.next()){
-				ip = new IP();
+				ip = new Ip();
 				ip.setIp_address(rs.getString("ip_address"));
 				ip.setIp_prot(rs.getString("ip_prot"));
 				ip.setIp_is_anonymous(rs.getString("ip_is_anonymous"));
