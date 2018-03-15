@@ -2,7 +2,7 @@ package com.maven.spider.entity;
 
 import java.io.Serializable;
 
-public class IP implements Serializable {
+public class Ip implements Serializable {
 
 	/**
 	 * 
@@ -91,11 +91,11 @@ public class IP implements Serializable {
 		return serialVersionUID;
 	}
 
-	public IP() {
+	public Ip() {
 		super();
 	}
 
-	public IP(String id, String ip_address, String ip_prot, String ip_server_address, String ip_is_anonymous,
+	public Ip(String id, String ip_address, String ip_prot, String ip_server_address, String ip_is_anonymous,
 			Integer ip_is_user, String ip_type, String response_time, String create_time) {
 		super();
 		this.id = id;
@@ -109,7 +109,7 @@ public class IP implements Serializable {
 		this.create_time = create_time;
 	}
 
-	public IP(String ip_address, String ip_prot, String ip_server_address, String ip_is_anonymous, Integer ip_is_user,
+	public Ip(String ip_address, String ip_prot, String ip_server_address, String ip_is_anonymous, Integer ip_is_user,
 			String ip_type, String response_time, String create_time) {
 		super();
 		this.ip_address = ip_address;
@@ -123,7 +123,7 @@ public class IP implements Serializable {
 	}
 
 	
-	public IP(String ip_address, String ip_prot, String ip_server_address, String ip_is_anonymous, String ip_type) {
+	public Ip(String ip_address, String ip_prot, String ip_server_address, String ip_is_anonymous, String ip_type) {
 		super();
 		this.ip_address = ip_address;
 		this.ip_prot = ip_prot;

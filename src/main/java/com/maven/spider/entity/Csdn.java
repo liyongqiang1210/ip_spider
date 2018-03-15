@@ -2,7 +2,7 @@ package com.maven.spider.entity;
 
 import java.io.Serializable;
 
-public class CSDN implements Serializable {
+public class Csdn implements Serializable {
 
 	/**
 	 * 
@@ -17,11 +17,11 @@ public class CSDN implements Serializable {
 	private String articleType;
 	private int isDelete;
 
-	public CSDN() {
+	public Csdn() {
 		super();
 	}
 
-	public CSDN(String url, String title, String author, String createTime, String source, String articleType) {
+	public Csdn(String url, String title, String author, String createTime, String source, String articleType) {
 		super();
 		this.url = url;
 		this.title = title;
@@ -32,7 +32,7 @@ public class CSDN implements Serializable {
 	}
 
 
-	public CSDN(int id, String url, String title, String author, String createTime, String source, String articleType,
+	public Csdn(int id, String url, String title, String author, String createTime, String source, String articleType,
 			int isDelete) {
 		super();
 		this.id = id;
