@@ -25,36 +25,36 @@ public class ArticleMain {
 		timer.schedule(new TimerTask() {
 			// 执行次数计数器
 			int i = 0;
-
 			@Override
 			public void run() {
 				System.out.println("当前时间：" + DateUtil.getYMDHMS() + "定时器执行次数：" + i++);
 				// csdn
-				String CsdnContent = hcq.get("https://www.csdn.net/nav/newarticles");
-				List<Article> csdnArcitleList = ArticleParser.getCsdnArcitleList(CsdnContent, "最新文章", "CSDN");
-				for (Article article : csdnArcitleList) {
-					String url = article.getUrl();
-					if(url != null && url != "") {
-						boolean selectCsdn = ArticleJdbc.selectArticle(url);
-						if (selectCsdn) {
-							ArticleJdbc.insertArticle(article);
-						}
-					}
-				}
+				//ArticleSpiderMain("https://www.csdn.net/nav/newarticles", "最新文章", "CSDN");
 				// cnblogs
-				String CnblogsContent = hcq.get("https://www.cnblogs.com/cate/all/");
-				List<Article> cnblogsList = ArticleParser.getCnblogsList(CnblogsContent, "所有随笔", "cnblogs");
-				for (Article article : cnblogsList) {
-					String url = article.getUrl();
-					if(url != null && url != "") {
-						boolean selectCsdn = ArticleJdbc.selectArticle(url);
-						if (selectCsdn) {
-							ArticleJdbc.insertArticle(article);
-						}
-					}
+				ArticleSpiderMain("https://www.cnblogs.com/cate/all/", "所有随笔", "cnblogs");
+			}
+		
+		}, afterSs, intervalSsl);
+
+	}
+	/**
+	 * 博客爬虫入口方法
+	 * 
+	 * @param mainUrl
+	 * @param articleType
+	 * @param source
+	 */
+	private static void ArticleSpiderMain(String mainUrl, String articleType, String source) {
+		String content = hcq.get(mainUrl);
+		List<Article> ArcitleList = ArticleParser.getCsdnArcitleList(content, articleType, source);
+		for (Article article : ArcitleList) {
+			String url = article.getUrl();
+			if (url != null && url != "") {
+				boolean selectCsdn = ArticleJdbc.selectArticle(url);
+				if (selectCsdn) {
+					ArticleJdbc.insertArticle(article);
 				}
 			}
-		}, afterSs, intervalSsl);
-		
+		}
 	}
 }
