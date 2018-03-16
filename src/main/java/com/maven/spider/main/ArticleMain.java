@@ -29,9 +29,10 @@ public class ArticleMain {
 			public void run() {
 				System.out.println("当前时间：" + DateUtil.getYMDHMS() + "定时器执行次数：" + i++);
 				// csdn
-				//ArticleSpiderMain("https://www.csdn.net/nav/newarticles", "最新文章", "CSDN");
+				ArticleSpiderMain("https://www.csdn.net/nav/newarticles", "最新文章", "CSDN");
 				// cnblogs
 				ArticleSpiderMain("https://www.cnblogs.com/cate/all/", "所有随笔", "cnblogs");
+				// 51CTO
 			}
 		
 		}, afterSs, intervalSsl);
@@ -46,7 +47,12 @@ public class ArticleMain {
 	 */
 	private static void ArticleSpiderMain(String mainUrl, String articleType, String source) {
 		String content = hcq.get(mainUrl);
-		List<Article> ArcitleList = ArticleParser.getCsdnArcitleList(content, articleType, source);
+		List<Article> ArcitleList = null;
+		if(source == "CSDN") {
+			ArcitleList = ArticleParser.getCsdnArcitleList(content, articleType, source);
+		}else if(source == "cnblogs") {
+			ArcitleList = ArticleParser.getCnblogsArticleList(content, articleType, source);
+		}
 		for (Article article : ArcitleList) {
 			String url = article.getUrl();
 			if (url != null && url != "") {
