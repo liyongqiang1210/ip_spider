@@ -89,18 +89,40 @@ public class ArticleParser {
 	 * @return
 	 */
 	public static List<Article> get51ctoArticleList(String content, String articleType, String source) {
-
 		List<Article> list = new ArrayList<Article>();
 		Document doc = Jsoup.parse(content);
-		Elements elements = doc.select("div.artical-list>li");
+		Elements elements = doc.select("ul.artical-list>li");
 		for (Element element : elements) {
 			String title = element.select("a.tit").text();
 			String url = element.select("a.tit").attr("href");
 			String author = element.select("a.name").text();
-			String ct = element.select("a.time").text();
-			String createTime = ct.substring(ct.indexOf(": "), ct.indexOf(" 分"));
+			String ct = element.select("p.time").text();
+			String createTime = ct.substring(ct.indexOf("：") + 1);
 			Article cto = new Article(url, title, author, createTime, source, articleType);
 			list.add(cto);
+		}
+		return list;
+	}
+
+	/**
+	 * 获取开源中国博客url列表的方法
+	 * 
+	 * @param content
+	 * @param articleType
+	 * @param source
+	 * @return
+	 */
+	public static List<Article> getOschinaArticleList(String content, String articleType, String source) {
+		List<Article> list = new ArrayList<Article>();
+		Document doc = Jsoup.parse(content);
+		Elements elements = doc.select("div.blog-list>div.item>div.box-aw");
+		for (Element element : elements) {
+			String title = element.select("a.blog-title-link").attr("title");
+			String url = element.select("a.blog-title-link").attr("href");
+			String author = element.select("footer.blog-footer-box>span").eq(0).text();
+			String createTime = element.select("footer.blog-footer-box>span").eq(2).text();
+			Article oschina = new Article(url, title, author, createTime, source, articleType);
+			list.add(oschina);
 		}
 		return list;
 	}
