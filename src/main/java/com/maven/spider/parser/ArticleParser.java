@@ -19,8 +19,6 @@ import com.maven.spider.entity.Article;
  */
 public class ArticleParser {
 
-	private static final List<Article> list = new ArrayList<Article>();
-
 	/**
 	 * 获取csdn文章url列表的方法
 	 * 
@@ -30,6 +28,7 @@ public class ArticleParser {
 	 * @return
 	 */
 	public static List<Article> getCsdnArcitleList(String content, String articleType, String source) {
+		List<Article> list = new ArrayList<Article>();
 		// 将网页内容转换成doc格式
 		Document doc = Jsoup.parse(content);
 		Elements elements = doc.select("ul.feedlist_mod>li.clearfix");
@@ -56,7 +55,7 @@ public class ArticleParser {
 	 * @return
 	 */
 	public static List<Article> getCnblogsList(String content, String articleType, String source) {
-
+		List<Article> list = new ArrayList<Article>();
 		Document doc = Jsoup.parse(content);
 		Elements elements = doc.select("div.post_item_body");
 		for (Element element : elements) {
