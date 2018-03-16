@@ -52,8 +52,8 @@ public class Article implements Serializable {
 
 	@Override
 	public String toString() {
-		return "CSDN [id=" + id + ", url=" + url + ", title=" + title + ", author=" + author + ", createTime="
-				+ createTime + ", source=" + source + ", articleType=" + articleType + ", isDelete=" + isDelete + "]";
+		return "{id=" + id + ", url=" + url + ", title=" + title + ", author=" + author + ", createTime="
+				+ createTime + ", source=" + source + ", articleType=" + articleType + ", isDelete=" + isDelete + "}";
 	}
 
 	public int getId() {
