@@ -19,7 +19,6 @@ public class News implements Serializable {
 	private String newsContentId;
 	private String newsPictureId;
 	private String newsReleaseTime;
-	private String newsAuthor;
 
 	public String getNewsId() {
 		return newsId;
@@ -77,14 +76,6 @@ public class News implements Serializable {
 		this.newsReleaseTime = newsReleaseTime;
 	}
 
-	public String getNewsAuthor() {
-		return newsAuthor;
-	}
-
-	public void setNewsAuthor(String newsAuthor) {
-		this.newsAuthor = newsAuthor;
-	}
-
 	public String getNewsContentId() {
 		return newsContentId;
 	}
@@ -101,18 +92,17 @@ public class News implements Serializable {
 	public String toString() {
 		return "News [newsId=" + newsId + ", newsTitle=" + newsTitle + ", newsUrl=" + newsUrl + ", newsSourceWebsite="
 				+ newsSourceWebsite + ", newsType=" + newsType + ", newsContentId=" + newsContentId + ", newsPictureId="
-				+ newsPictureId + ", newsReleaseTime=" + newsReleaseTime + ", newsAuthor=" + newsAuthor + "]";
+				+ newsPictureId + ", newsReleaseTime=" + newsReleaseTime +  "]";
 	}
 
-	public News(String newsTitle, String newsUrl, String newsSourceWebsite, String newsType, String newsReleaseTime,
-			String newsAuthor) {
+	public News(String newsId, String newsTitle, String newsUrl, String newsSourceWebsite, String newsType, String newsReleaseTime) {
 		super();
+		this.newsId = newsId;
 		this.newsTitle = newsTitle;
 		this.newsUrl = newsUrl;
 		this.newsSourceWebsite = newsSourceWebsite;
 		this.newsType = newsType;
 		this.newsReleaseTime = newsReleaseTime;
-		this.newsAuthor = newsAuthor;
 	}
 
 	public News() {
