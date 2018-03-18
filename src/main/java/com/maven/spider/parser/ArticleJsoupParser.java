@@ -16,7 +16,7 @@ import com.maven.spider.entity.Article;
  * @author Li Yongqiang
  *
  */
-public class ArticleParser {
+public class ArticleJsoupParser {
 
 	/**
 	 * 获取csdn文章url列表的方法

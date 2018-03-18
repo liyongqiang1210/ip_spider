@@ -15,7 +15,7 @@ import com.maven.spider.entity.Ip;
  * @author Li Yongqiang
  *
  */
-public class IpParser {
+public class IpJsoupParser {
 
 	/**
 	 * 分析html页面获取需要的数据
