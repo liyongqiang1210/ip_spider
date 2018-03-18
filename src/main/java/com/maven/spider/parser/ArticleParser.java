@@ -11,7 +11,7 @@ import org.jsoup.select.Elements;
 import com.maven.spider.entity.Article;
 
 /**
- * 技术博客文章解析器
+ * 技术博客文章解析器---Jsoup
  * 
  * @author Li Yongqiang
  *
