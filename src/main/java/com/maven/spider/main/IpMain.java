@@ -5,7 +5,7 @@ import java.util.List;
 import com.maven.spider.entity.Ip;
 import com.maven.spider.httpclient.HttpClientRequest;
 import com.maven.spider.jdbc.IpJdbc;
-import com.maven.spider.parser.IpParser;
+import com.maven.spider.parser.IpJsoupParser;
 import com.maven.spider.testip.TestIP;
 
 /**
@@ -18,7 +18,7 @@ public class IpMain {
 
 	public static void main(String[] args) throws InterruptedException {
 		HttpClientRequest gh = new HttpClientRequest();
-		IpParser ph = new IpParser();
+		IpJsoupParser ph = new IpJsoupParser();
 		IpJdbc db = new IpJdbc();
 		TestIP test = new TestIP();
 
