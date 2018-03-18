@@ -19,8 +19,9 @@ import org.apache.http.util.EntityUtils;
 public class HttpClientRequest {
 
 	// 浏览器请求头User-Agent 
-	final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:58.0) Gecko/20100101 Firefox/58.0";
-
+	private static final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:58.0) Gecko/20100101 Firefox/58.0";
+	private static final String ACCEPT = "text/plain;charset=utf-8"; // 设置请求的报文头部的编码
+	private static final String CONTENT_TYPE = "application/x-www-form-urlencoded; charset=utf-8"; // 设置期望服务端返回的编码
 	/**
 	 * get方式获取网页内容
 	 * 
@@ -36,6 +37,8 @@ public class HttpClientRequest {
 			// 创建get请求
 			HttpGet req = new HttpGet(url);
 			req.setHeader("User-Agent", USER_AGENT);
+			req.setHeader("Accept", ACCEPT);
+			req.setHeader("Content-Type", CONTENT_TYPE);
 			// 发送get请求
 			CloseableHttpResponse res = httpClient.execute(req);
 			try {
@@ -49,7 +52,7 @@ public class HttpClientRequest {
 				// 如果返回200则证明请求成功
 				if (statusCode == 200) {
 					// 获取网页内容
-					content = EntityUtils.toString(entity);
+					content = EntityUtils.toString(entity,"utf-8");
 				}
 			} finally {
 				res.close();
