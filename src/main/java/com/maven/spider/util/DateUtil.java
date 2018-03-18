@@ -14,5 +14,15 @@ public class DateUtil {
 		String date = sdf.format(new Date());
 		return date;
 	}
+	
+	/**
+	 * 获取年-月-日格式字符串数据
+	 * @return
+	 */
+	public static String getYMD(){
+		SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+		String date = sdf.format(new Date());
+		return date;
+	}
 
 }
