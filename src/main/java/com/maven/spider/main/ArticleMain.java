@@ -7,7 +7,7 @@ import java.util.TimerTask;
 import com.maven.spider.entity.Article;
 import com.maven.spider.httpclient.HttpClientRequest;
 import com.maven.spider.jdbc.ArticleJdbc;
-import com.maven.spider.parser.ArticleParser;
+import com.maven.spider.parser.ArticleJsoupParser;
 import com.maven.spider.util.DateUtil;
 
 public class ArticleMain {
@@ -33,9 +33,9 @@ public class ArticleMain {
 				// cnblogs
 				ArticleSpiderMain("https://www.cnblogs.com/cate/all/", "所有随笔", "cnblogs");
 				// 51CTO
-				ArticleSpiderMain("http://blog.51cto.com/original", "最新原创", "51CTO");
+			//	ArticleSpiderMain("http://blog.51cto.com/original", "最新原创", "51CTO");
 				// 开源中国
-				ArticleSpiderMain("https://www.oschina.net/blog", "最新文章", "oschina");
+				//ArticleSpiderMain("https://www.oschina.net/blog", "最新文章", "oschina");
 			}
 		
 		}, afterSs, intervalSsl);
@@ -52,19 +52,19 @@ public class ArticleMain {
 		String content = hcq.get(mainUrl);
 		List<Article> ArticleList = null;
 		if(source == "CSDN") {// CSDN解析器
-			ArticleList = ArticleParser.getCsdnArcitleList(content, articleType, source);
+			ArticleList = ArticleJsoupParser.getCsdnArcitleList(content, articleType, source);
 		}else if(source == "cnblogs") {// 博客园解析器
-			ArticleList = ArticleParser.getCnblogsArticleList(content, articleType, source);
+			ArticleList = ArticleJsoupParser.getCnblogsArticleList(content, articleType, source);
 		}else if(source == "51CTO"){// 51CTO博客解析器
-			ArticleList = ArticleParser.get51ctoArticleList(content, articleType, source);
+			ArticleList = ArticleJsoupParser.get51ctoArticleList(content, articleType, source);
 		}else if(source == "oschina"){// 开源中国博客解析器
-			ArticleList = ArticleParser.getOschinaArticleList(content, articleType, source);
+			ArticleList = ArticleJsoupParser.getOschinaArticleList(content, articleType, source);
 		}
 		for (Article article : ArticleList) {
 			String url = article.getUrl();
 			if (url != null && url != "") {
-				boolean selectCsdn = ArticleJdbc.selectArticle(url);
-				if (selectCsdn) {
+				boolean isExit = ArticleJdbc.selectArticle(url);
+				if (isExit) {
 					ArticleJdbc.insertArticle(article);
 				}
 			}
