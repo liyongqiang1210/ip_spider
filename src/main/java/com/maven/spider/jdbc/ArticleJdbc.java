@@ -39,7 +39,6 @@ public class ArticleJdbc {
 				System.out.println(article.getUrl()+"=========>添加成功！");
 				return true;
 			}
-			System.out.println(article.getUrl()+"=========>添加失败！");
 			return false;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -64,7 +63,6 @@ public class ArticleJdbc {
 			ps.setString(1, url);
 			rs = ps.executeQuery();
 			if(rs.next()){// 已存在 
-				System.out.println(url + "===========>已存在，添加失败!");
 				return false;
 			}else{// 不存在
 				return true;
