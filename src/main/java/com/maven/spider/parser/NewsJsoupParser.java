@@ -36,11 +36,11 @@ public class NewsJsoupParser {
 		List<News> list = new ArrayList<News>();
 		Document doc = Jsoup.parse(content);
 		if (newsType.equals("军事")) {
-			
+
 			Elements elements = doc.select("ul.list_show>li"); // 获取新闻列表集合
-			
+
 			for (Element element : elements) {
-				
+
 				String newsId = UUID.randomUUID().toString(); // 获取新闻id
 				String newsTitle = element.select("h2>a").text(); // 获取新闻title
 				String newsUrl = element.select("h2>a").attr("href"); // 获取新闻url
@@ -52,9 +52,8 @@ public class NewsJsoupParser {
 					list.add(news);
 				}
 			}
-		} else if (newsType.equals("国际") || newsType.equals("房产") || newsType.equals("科技")) {
-			
-			
+		} else if (newsType.equals("国际") || newsType.equals("房产") || newsType.equals("科技") || newsType.equals("娱乐")) {
+
 			// 获取新闻列表集合
 			Elements elements = doc.select("ul.dataList>li");
 			for (Element element : elements) {
@@ -69,36 +68,50 @@ public class NewsJsoupParser {
 					list.add(news);
 				}
 			}
-			
+
 			// 获取房产滚动新闻集合
-			Elements gd_elements = doc.select("ul#gd_content>li"); 
-			
+			Elements gd_elements = doc.select("ul#gd_content>li");
 			for (Element element : gd_elements) {
 				String newsId = UUID.randomUUID().toString(); // 获取新闻id
 				String newsTitle = element.select("li>a").text(); // 获取新闻title
 				String newsUrl = element.select("li>a").attr("href"); // 获取新闻url
-				String newsReleaseTime = DateUtil.getYMD(); // 获取今天的日期 
-				
-				if(newsUrl.matches(".*" + newsReleaseTime + ".*")){ // 根据url地址判断是否是今天的新闻
-					
+				String newsReleaseTime = DateUtil.getYMD(); // 获取今天的日期
+
+				if (newsUrl.matches(".*" + newsReleaseTime + ".*")) { // 根据url地址判断是否是今天的新闻
+
 					News news = new News(newsId, newsTitle, newsUrl, newsSourceWebsite, newsType, newsReleaseTime);
 					list.add(news);
 				}
 			}
-			
+
 			// 获取科技新闻集合
 			Elements kj_element = doc.select("a");
 			for (Element element : kj_element) {
-				
+
 				String newsUrl = element.select("a").attr("href");
 				String newsReleaseTime = DateUtil.getYMD();
-				
-				if(newsUrl.matches(".*" + newsReleaseTime.substring(0,7) + "/" + newsReleaseTime.substring(8) + ".*")){
+
+				if (newsUrl
+						.matches(".*" + newsReleaseTime.substring(0, 7) + "/" + newsReleaseTime.substring(8) + ".*")) {
 
 					String newsId = UUID.randomUUID().toString(); // 获取新闻id
 					String newsTitle = element.select("a").text();
-					System.out.println(newsTitle + " ============> " + newsUrl);
+
+					News news = new News(newsId, newsTitle, newsUrl, newsSourceWebsite, newsType, newsReleaseTime);
+					list.add(news);
 				}
+			}
+		} else if (newsType.equals("体育")) {
+			Elements ty_element = doc.select("div.scpd_page_box>li");
+			for (Element element : ty_element) {
+
+				String newsId = UUID.randomUUID().toString(); // 获取新闻id
+				String newsUrl = element.select("div.bnn>a").attr("href");
+				String newsReleaseTime = DateUtil.getYMD().substring(0, 5) + element.select("b").text();
+				String newsTitle = element.select("div.bnn>a").text();
+
+					News news = new News(newsId, newsTitle, newsUrl, newsSourceWebsite, newsType, newsReleaseTime);
+					list.add(news);
 			}
 		}
 
