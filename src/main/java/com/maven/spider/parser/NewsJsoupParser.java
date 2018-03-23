@@ -52,7 +52,7 @@ public class NewsJsoupParser {
 					list.add(news);
 				}
 			}
-		} else if (newsType.equals("国际") || newsType.equals("房产") || newsType.equals("科技") || newsType.equals("娱乐")) {
+		} else if (newsType.equals("国际") || newsType.equals("房产") || newsType.equals("科技") || newsType.equals("娱乐") || newsType.equals("汽车")) {
 
 			// 获取新闻列表集合
 			Elements elements = doc.select("ul.dataList>li");
