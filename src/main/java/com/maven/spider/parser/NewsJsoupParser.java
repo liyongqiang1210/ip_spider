@@ -110,9 +110,12 @@ public class NewsJsoupParser {
 				String newsReleaseTime = DateUtil.getYMD().substring(0, 5) + element.select("b").text();
 				String newsTitle = element.select("div.bnn>a").text();
 
+				if(newsReleaseTime.equals(dateTime)) {
+					
 					News news = new News(newsId, newsTitle, newsUrl, newsSourceWebsite, newsType, newsReleaseTime);
 					list.add(news);
-			}
+				}
+				}
 		}
 
 		return list;
