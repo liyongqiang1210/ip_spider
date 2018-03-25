@@ -23,9 +23,12 @@ public class NewsMain {
 		//String url = "http://www.xinhuanet.com/mil/index.htm"; // 军事
 		//String url = "http://www.xinhuanet.com/world/index.htm"; // 国际
 		//String url = "http://www.news.cn/house/index.htm"; // 房产
-		String url = "http://www.xinhuanet.com/tech/index.htm"; // 科技
+		//String url = "http://www.xinhuanet.com/tech/index.htm"; // 科技
+		//String url = "http://ent.news.cn/"; // 娱乐
+		//String url = "http://sports.xinhuanet.com/"; // 体育
+		String url = "http://www.news.cn/auto/"; // 汽车
 		String content = hcq.get(url);
-		List<News> newsList = NewsJsoupParser.getNewsList(content, "新华网", "科技");
+		List<News> newsList = NewsJsoupParser.getNewsList(content, "新华网", "汽车");
 		for(News news: newsList){
 			boolean isExit = NewsJdbc.getNewsUrlIsExit(news.getNewsUrl());
 			if(!isExit){
