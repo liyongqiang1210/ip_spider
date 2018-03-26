@@ -18,18 +18,19 @@ import org.apache.http.util.EntityUtils;
  */
 public class HttpClientRequest {
 
-	// 浏览器请求头User-Agent 
+	// 浏览器请求头User-Agent
 	private static final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:58.0) Gecko/20100101 Firefox/58.0";
 	private static final String ACCEPT = "text/plain;charset=utf-8"; // 设置请求的报文头部的编码
 	private static final String CONTENT_TYPE = "application/x-www-form-urlencoded; charset=utf-8"; // 设置期望服务端返回的编码
+
 	/**
-	 * get方式获取网页内容
+	 * get方式获取网页内容 此方法需要传递的参数为目标网址url和目标网址的编码格式
 	 * 
 	 * @param url
 	 * @param code
 	 * @return
 	 */
-	public String get(String url,String coding) {
+	public String get(String url, String coding) {
 		// 创建HttpClient对象
 		CloseableHttpClient httpClient = HttpClients.createDefault();
 		// 响应的内容
@@ -53,7 +54,7 @@ public class HttpClientRequest {
 				// 如果返回200则证明请求成功
 				if (statusCode == 200) {
 					// 获取网页内容
-					content = EntityUtils.toString(entity,coding);
+					content = EntityUtils.toString(entity, coding);
 				}
 			} finally {
 				res.close();
