@@ -23,18 +23,22 @@ public class NewsUrlJdbc {
 		UrlList ut = new UrlList();
 		String sql = "select * from url_list where news_url_source = ?";
 		Connection conn = DBUtil.getConnection();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
 		try {
-			PreparedStatement ps = conn.prepareStatement(sql);
+			ps = conn.prepareStatement(sql);
 			ps.setString(1, newsType);
-			ResultSet rs = ps.executeQuery();
+			rs = ps.executeQuery();
 			while (rs.next()) {
-				ut.setNewsUrlSource(rs.getString(1));
-				ut.setNewsUrl(rs.getString(2));
-				ut.setNewsType(rs.getString(3));
+				ut.setNewsUrlSource(rs.getString(2));
+				ut.setNewsUrl(rs.getString(3));
+				ut.setNewsType(rs.getString(4));
 				list.add(ut);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			DBUtil.close(rs, ps, conn);
 		}
 
 		return list;
