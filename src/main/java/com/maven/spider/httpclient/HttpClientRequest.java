@@ -26,9 +26,10 @@ public class HttpClientRequest {
 	 * get方式获取网页内容
 	 * 
 	 * @param url
+	 * @param code
 	 * @return
 	 */
-	public String get(String url) {
+	public String get(String url,String coding) {
 		// 创建HttpClient对象
 		CloseableHttpClient httpClient = HttpClients.createDefault();
 		// 响应的内容
@@ -52,7 +53,7 @@ public class HttpClientRequest {
 				// 如果返回200则证明请求成功
 				if (statusCode == 200) {
 					// 获取网页内容
-					content = EntityUtils.toString(entity,"utf-8");
+					content = EntityUtils.toString(entity,coding);
 				}
 			} finally {
 				res.close();
