@@ -1,6 +1,5 @@
 package com.maven.spider.parser.baidu;
 
-import java.util.Iterator;
 import java.util.UUID;
 import java.util.Vector;
 import java.util.regex.Matcher;
@@ -85,6 +84,7 @@ public class BaiJiaJsoupParser {
 			System.out.println("进来了");
 			releaseTime = m.group(); // 获取匹配到的字符串
 		}
+		
 		return releaseTime;
 	}
 }
