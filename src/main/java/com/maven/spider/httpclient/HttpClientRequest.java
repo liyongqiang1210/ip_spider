@@ -30,7 +30,7 @@ public class HttpClientRequest {
 	 * @param code
 	 * @return
 	 */
-	public String get(String url, String coding) {
+	public static String get(String url, String coding) {
 		// 创建HttpClient对象
 		CloseableHttpClient httpClient = HttpClients.createDefault();
 		// 响应的内容
