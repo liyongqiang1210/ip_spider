@@ -84,7 +84,6 @@ public class BaiJiaJsoupParser {
 			System.out.println("进来了");
 			releaseTime = m.group(); // 获取匹配到的字符串
 		}
-		
 		return releaseTime;
 	}
 }
