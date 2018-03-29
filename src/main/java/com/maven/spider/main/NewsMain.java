@@ -11,13 +11,12 @@ import com.maven.spider.parser.NewsJsoupParser;
 
 /**
  * 新闻爬虫入口主函数
- * 
+ * 会者不难，难者不会
  * @author Li Yongqiang
  *
  */
 public class NewsMain {
 
-	static final HttpClientRequest hcq = new HttpClientRequest();
 
 	public static void main(String[] args) {
 		
@@ -25,7 +24,7 @@ public class NewsMain {
 		
 		for (UrlList ul : urlList) {
 
-			String content = hcq.get(ul.getNewsUrl(),"gb2312");
+			String content = HttpClientRequest.get(ul.getNewsUrl(),"gb2312");
 			List<News> newsList = NewsJsoupParser.getNewsList(content, ul.getNewsUrlSource(), ul.getNewsType());
 			
 			for (News news : newsList) {
