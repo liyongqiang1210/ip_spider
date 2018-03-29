@@ -49,7 +49,7 @@ public class ArticleMain {
 	 * @param source
 	 */
 	private static void ArticleSpiderMain(String mainUrl, String articleType, String source) {
-		String content = hcq.get(mainUrl);
+		String content = hcq.get(mainUrl,"utf-8");
 		List<Article> ArticleList = null;
 		if(source == "CSDN") {// CSDN解析器
 			ArticleList = ArticleJsoupParser.getCsdnArcitleList(content, articleType, source);

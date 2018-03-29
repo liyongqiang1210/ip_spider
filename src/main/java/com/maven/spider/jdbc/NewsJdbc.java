@@ -37,6 +37,8 @@ public class NewsJdbc {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally{
+			DBUtil.close(rs, ps, conn);
 		}
 		return false;
 	}
@@ -55,12 +57,15 @@ public class NewsJdbc {
 			ps.setString(4, news.getNewsSourceWebsite());
 			ps.setString(5, news.getNewsType());
 			ps.setString(6, news.getNewsReleaseTime());
+			System.out.println(ps.toString());
 			int isSuccess = ps.executeUpdate();
 			if(isSuccess == 1){
 				System.out.println(news.getNewsUrl() + "================>添加成功！");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			DBUtil.close(null, ps, conn);
 		}
 	}
 }

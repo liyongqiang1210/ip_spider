@@ -27,7 +27,7 @@ public class IpMain {
 			// 设置url
 			String url = "http://www.xicidaili.com/nn/" + i;
 			// 获取网页内容
-			String content = gh.get(url);
+			String content = gh.get(url,"utf-8");
 			// 获取json格式的ip数据列表
 			List<Ip> list = ph.getIPList(content);
 			for (Ip ip : list) {
