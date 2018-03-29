@@ -1,5 +1,6 @@
 package com.maven.spider.parser.baidu;
 
+import java.util.Iterator;
 import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -24,13 +25,41 @@ public class BaiJiaJsoupParser {
 			String title = element.select("div.title>a").text();
 			String url = "https://baijia.baidu.com" + element.select("div.title>a").attr("href");
 			String author = element.select("div.author>a").text();
-			String authorUrl = element.select("div.author>a").attr("href");
-			String releaseTime = getReleaseTime("[d]{2}:[d]{2}", element.select("p.info").text());
-			String imageUrl = null;
+			String authorUrl = "https://baijia.baidu.com" + element.select("div.author>a").attr("href");
+			String releaseTime = getReleaseTime("[0-9]{2}:[0-9]{2}", element.select("p.info").text());
+			String imageUrl = getImageUrl(element); // 获取图片地址
+			System.out.println(title + ":" + imageUrl);
 		}
-		
+
 		return vector;
 
+	}
+
+	/**
+	 * 根据单个百家问文章标签获取图片地址需传参数(百家问单个问题标签)
+	 * 
+	 * @param element
+	 *            百家问单个问题标签
+	 * @return
+	 */
+	private static String getImageUrl(Element element) {
+
+		Elements elements_img = element.select("img"); // 获取图片标签集合
+		int imageSize = elements_img.size(); // 获取图片数量
+		String imageUrl = "";
+
+		// 根据img标签数量判断图片是否为多个
+		if (imageSize > 1) {
+
+			for (Element element_img : elements_img) {
+
+				String image = element_img.select("img").attr("src");
+				imageUrl = imageUrl + image + ";"; // 将图片url地址拼接到一起
+			}
+		} else {
+			imageUrl = imageUrl + elements_img.select("img").attr("src");
+		}
+		return imageUrl;
 	}
 
 	/**
@@ -45,9 +74,11 @@ public class BaiJiaJsoupParser {
 	public static String getReleaseTime(String regex, String info) {
 
 		Pattern p = Pattern.compile(regex); // 创建Pattern对象
-		Matcher m = p.matcher(regex);
+		Matcher m = p.matcher(info);
 		String releaseTime = null;
-		while (m.find()) {
+		System.out.println(m.find());
+		if (!m.find()) {
+			System.out.println("进来了");
 			releaseTime = m.group(); // 获取匹配到的字符串
 		}
 		return releaseTime;
