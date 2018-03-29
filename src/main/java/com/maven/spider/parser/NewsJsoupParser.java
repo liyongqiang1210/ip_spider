@@ -124,6 +124,7 @@ public class NewsJsoupParser {
 			
 			Elements elements = doc.select("div.content_list>ul>li");
 			for(Element element : elements){
+				
 				String newsId = UUID.randomUUID().toString();
 				String newsUrl = element.select("div.dd_bt>a").attr("href");
 				newsType = element.select("div.dd_lm>a").text(); // 获取新闻类型
