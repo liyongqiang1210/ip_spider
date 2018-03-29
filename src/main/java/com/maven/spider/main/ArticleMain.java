@@ -14,8 +14,6 @@ public class ArticleMain {
 
 	// 创建定时器Timer对象
 	private static final Timer timer = new Timer();
-	// 创建模拟浏览器请求对象
-	private final static HttpClientRequest hcq = new HttpClientRequest();
 
 	public static void main(String[] args) {
 		// 启动后延迟时间
@@ -49,7 +47,7 @@ public class ArticleMain {
 	 * @param source
 	 */
 	private static void ArticleSpiderMain(String mainUrl, String articleType, String source) {
-		String content = hcq.get(mainUrl,"utf-8");
+		String content = HttpClientRequest.get(mainUrl,"utf-8");
 		List<Article> ArticleList = null;
 		if(source == "CSDN") {// CSDN解析器
 			ArticleList = ArticleJsoupParser.getCsdnArcitleList(content, articleType, source);

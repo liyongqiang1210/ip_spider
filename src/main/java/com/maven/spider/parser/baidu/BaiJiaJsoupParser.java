@@ -1,6 +1,7 @@
 package com.maven.spider.parser.baidu;
 
 import java.util.Iterator;
+import java.util.UUID;
 import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -22,13 +23,16 @@ public class BaiJiaJsoupParser {
 		Elements elements = doc.select("div#articleList>div.article-info"); // 用此方法筛选出我们需要的文档标签集合
 		for (Element element : elements) {
 
+			String id = UUID.randomUUID().toString();
 			String title = element.select("div.title>a").text();
 			String url = "https://baijia.baidu.com" + element.select("div.title>a").attr("href");
 			String author = element.select("div.author>a").text();
 			String authorUrl = "https://baijia.baidu.com" + element.select("div.author>a").attr("href");
 			String releaseTime = getReleaseTime("[0-9]{2}:[0-9]{2}", element.select("p.info").text());
 			String imageUrl = getImageUrl(element); // 获取图片地址
-			System.out.println(title + ":" + imageUrl);
+			
+			BaiJiaHao bjh = new BaiJiaHao(id, title, url, author, authorUrl, releaseTime, imageUrl);
+			vector.add(bjh);
 		}
 
 		return vector;
