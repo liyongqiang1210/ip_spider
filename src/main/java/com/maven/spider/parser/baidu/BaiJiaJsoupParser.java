@@ -28,6 +28,7 @@ public class BaiJiaJsoupParser {
 			String releaseTime = getReleaseTime("[d]{2}:[d]{2}", element.select("p.info").text());
 			String imageUrl = null;
 		}
+		
 		return vector;
 
 	}
