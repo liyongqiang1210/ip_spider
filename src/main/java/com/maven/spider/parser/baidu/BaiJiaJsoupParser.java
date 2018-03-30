@@ -11,10 +11,23 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.maven.spider.entity.BaiJiaHao;
+import com.maven.spider.util.DateUtil;
 
+/**
+ * 
+ * @author liyongqiang
+ *
+ */
 public class BaiJiaJsoupParser {
 
-	public static Vector<BaiJiaHao> getBaiJiaListData(String content) {
+	/**
+	 * 此方法功能是根据html页面内容分析出我们所要的数据需传入网页内容content与网址类型type两个参数
+	 * 
+	 * @param content
+	 * @param type
+	 * @return
+	 */
+	public static Vector<BaiJiaHao> getBaiJiaListData(String content, String type) {
 
 		Vector<BaiJiaHao> vector = new Vector<BaiJiaHao>();
 
@@ -29,9 +42,9 @@ public class BaiJiaJsoupParser {
 			String authorUrl = "https://baijia.baidu.com" + element.select("div.author>a").attr("href");
 			String releaseTime = getReleaseTime("[0-9]{2}:[0-9]{2}", element.select("p.info").text());
 			String imageUrl = getImageUrl(element); // 获取图片地址
-			
-			BaiJiaHao bjh = new BaiJiaHao(id, title, url, author, authorUrl, releaseTime, imageUrl);
-			vector.add(bjh);
+
+			BaiJiaHao bjh = new BaiJiaHao(id, title, url, type, author, authorUrl, releaseTime, imageUrl); // 实例化
+			vector.add(bjh); // 添加到Vector集合
 		}
 
 		return vector;
@@ -66,7 +79,7 @@ public class BaiJiaJsoupParser {
 	}
 
 	/**
-	 * 此方法用于根据正则表达式匹配出指定字符串 需传入正则表达式与要匹配的文本信息
+	 * 此方法用于根据正则表达式匹配出指定时间格式字符串 需传入正则表达式与要匹配的文本信息
 	 * 
 	 * @param info
 	 *            文本信息
@@ -79,10 +92,10 @@ public class BaiJiaJsoupParser {
 		Pattern p = Pattern.compile(regex); // 创建Pattern对象
 		Matcher m = p.matcher(info);
 		String releaseTime = null;
-		System.out.println(m.find());
-		if (!m.find()) {
-			System.out.println("进来了");
-			releaseTime = m.group(); // 获取匹配到的字符串
+		boolean find = m.find();
+		if (find) {
+			String group = m.group(); // 获取匹配到的字符串
+			releaseTime = DateUtil.getYMD() + " " + group + ":00"; // 补全时间格式
 		}
 		return releaseTime;
 	}
