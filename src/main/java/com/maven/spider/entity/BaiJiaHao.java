@@ -2,6 +2,12 @@ package com.maven.spider.entity;
 
 import java.io.Serializable;
 
+/**
+ * 百家号实体类
+ * 
+ * @author liyongqiang
+ *
+ */
 public class BaiJiaHao implements Serializable {
 
 	/**
@@ -73,7 +79,6 @@ public class BaiJiaHao implements Serializable {
 		this.imageUrl = imageUrl;
 	}
 
-	
 	@Override
 	public String toString() {
 		return "BaiJiaHao [id=" + id + ", title=" + title + ", url=" + url + ", type=" + type + ", author=" + author
@@ -96,6 +101,5 @@ public class BaiJiaHao implements Serializable {
 		this.releaseTime = releaseTime;
 		this.imageUrl = imageUrl;
 	}
-	
 
 }
