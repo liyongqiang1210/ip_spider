@@ -70,6 +70,15 @@ public class BaiJiaHao implements Serializable {
 	public void setReleaseTime(String releaseTime) {
 		this.releaseTime = releaseTime;
 	}
+	
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 
 	public String getImageUrl() {
 		return imageUrl;
