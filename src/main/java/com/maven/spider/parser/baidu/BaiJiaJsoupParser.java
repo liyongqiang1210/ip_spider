@@ -40,7 +40,7 @@ public class BaiJiaJsoupParser {
 			String url = "https://baijia.baidu.com" + element.select("div.title>a").attr("href");
 			String author = element.select("div.author>a").text();
 			String authorUrl = "https://baijia.baidu.com" + element.select("div.author>a").attr("href");
-			String releaseTime = getReleaseTime("[0-9]{2}:[0-9]{2}", element.select("p.info").text());
+			String releaseTime = getReleaseTime("[0-9]{2}:[0-9]{2}|[0-9]{2}-[0-9]{2}", element.select("p.info").text());
 			String imageUrl = getImageUrl(element); // 获取图片地址
 
 			BaiJiaHao bjh = new BaiJiaHao(id, title, url, type, author, authorUrl, releaseTime, imageUrl); // 实例化
@@ -95,7 +95,11 @@ public class BaiJiaJsoupParser {
 		boolean find = m.find();
 		if (find) {
 			String group = m.group(); // 获取匹配到的字符串
-			releaseTime = DateUtil.getYMD() + " " + group + ":00"; // 补全时间格式
+			if (group.contains("-")) { // 判断是日期还是时间包含-代表是日期否则就是时间
+				releaseTime = DateUtil.getYMD().substring(0, 5) + group;
+			} else {
+				releaseTime = DateUtil.getYMD() + " " + group + ":00"; // 补全时间格式
+			}
 		}
 		return releaseTime;
 	}
