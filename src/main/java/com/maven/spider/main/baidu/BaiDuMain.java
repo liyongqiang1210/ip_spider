@@ -4,6 +4,7 @@ import java.util.Vector;
 
 import com.maven.spider.entity.BaiJiaHao;
 import com.maven.spider.httpclient.HttpClientRequest;
+import com.maven.spider.jdbc.BaiJiaHaoJdbc;
 import com.maven.spider.parser.baidu.BaiJiaJsoupParser;
 
 public class BaiDuMain {
@@ -32,7 +33,10 @@ public class BaiDuMain {
 			}
 			Vector<BaiJiaHao> baiJiaListData = BaiJiaJsoupParser.getBaiJiaListData(content, type);
 			for (BaiJiaHao baiJiaHao : baiJiaListData) {
-				System.out.println(baiJiaHao);
+				boolean selectBaiJiaHaoIsExist = BaiJiaHaoJdbc.selectBaiJiaHaoIsExist(baiJiaHao.getUrl());
+				if(!selectBaiJiaHaoIsExist) {
+					BaiJiaHaoJdbc.insertBaiJiaHao(baiJiaHao);
+				}
 			}
 		}
 	}
