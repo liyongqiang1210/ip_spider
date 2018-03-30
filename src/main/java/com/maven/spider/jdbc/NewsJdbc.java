@@ -37,12 +37,17 @@ public class NewsJdbc {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally{
+		} finally {
 			DBUtil.close(rs, ps, conn);
 		}
 		return false;
 	}
 
+	/**
+	 * 向数据库插入新闻的方法
+	 * 
+	 * @param news
+	 */
 	public static void insertNewsUrl(News news) {
 
 		Connection conn = DBUtil.getConnection();
@@ -59,12 +64,12 @@ public class NewsJdbc {
 			ps.setString(6, news.getNewsReleaseTime());
 			System.out.println(ps.toString());
 			int isSuccess = ps.executeUpdate();
-			if(isSuccess == 1){
+			if (isSuccess == 1) {
 				System.out.println(news.getNewsUrl() + "================>添加成功！");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			DBUtil.close(null, ps, conn);
 		}
 	}
