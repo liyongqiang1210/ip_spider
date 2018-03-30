@@ -54,8 +54,7 @@ class BaiJiaHaoThread implements Runnable {
 					}
 				}
 
-				System.out.println(Thread.currentThread().getName() + "---Thread Stop...");
-				Thread.sleep(50000); // 5分钟爬取一次百家号文章
+				Thread.sleep(200000); // 20分钟爬取一次百家号文章
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
