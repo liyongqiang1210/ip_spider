@@ -11,6 +11,7 @@ public class BaiJiaHao implements Serializable {
 	private String id;
 	private String title;
 	private String url;
+	private String type;
 	private String author;
 	private String authorUrl;
 	private String releaseTime;
@@ -72,36 +73,29 @@ public class BaiJiaHao implements Serializable {
 		this.imageUrl = imageUrl;
 	}
 
+	
 	@Override
 	public String toString() {
-		return "BaiJiaHao [id=" + id + ", title=" + title + ", url=" + url + ", author=" + author + ", authorUrl="
-				+ authorUrl + ", releaseTime=" + releaseTime + ", imageUrl=" + imageUrl + "]";
-	}
-
-	public BaiJiaHao(String id, String title, String url, String author, String authorUrl, String releaseTime,
-			String imageUrl) {
-		super();
-		this.id = id;
-		this.title = title;
-		this.url = url;
-		this.author = author;
-		this.authorUrl = authorUrl;
-		this.releaseTime = releaseTime;
-		this.imageUrl = imageUrl;
-	}
-
-	public BaiJiaHao(String title, String url, String author, String authorUrl, String releaseTime, String imageUrl) {
-		super();
-		this.title = title;
-		this.url = url;
-		this.author = author;
-		this.authorUrl = authorUrl;
-		this.releaseTime = releaseTime;
-		this.imageUrl = imageUrl;
+		return "BaiJiaHao [id=" + id + ", title=" + title + ", url=" + url + ", type=" + type + ", author=" + author
+				+ ", authorUrl=" + authorUrl + ", releaseTime=" + releaseTime + ", imageUrl=" + imageUrl + "]";
 	}
 
 	public BaiJiaHao() {
 		super();
 	}
+
+	public BaiJiaHao(String id, String title, String url, String type, String author, String authorUrl,
+			String releaseTime, String imageUrl) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.url = url;
+		this.type = type;
+		this.author = author;
+		this.authorUrl = authorUrl;
+		this.releaseTime = releaseTime;
+		this.imageUrl = imageUrl;
+	}
+	
 
 }
