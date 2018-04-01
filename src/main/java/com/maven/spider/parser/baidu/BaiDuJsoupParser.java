@@ -10,7 +10,10 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.maven.spider.entity.BaiJiaHao;
+import com.maven.spider.entity.News;
 import com.maven.spider.util.DateUtil;
 
 /**
@@ -18,10 +21,10 @@ import com.maven.spider.util.DateUtil;
  * @author liyongqiang
  *
  */
-public class BaiJiaJsoupParser {
+public class BaiDuJsoupParser {
 
 	/**
-	 * 此方法功能是根据html页面内容分析出我们所要的数据需传入网页内容content与网址类型type两个参数
+	 * 此方法功能是根据html页面内容分析出我们所要的数据需传入参数：网页内容content与网址类型type
 	 * 
 	 * @param content
 	 * @param type
@@ -52,7 +55,34 @@ public class BaiJiaJsoupParser {
 	}
 
 	/**
-	 * 根据单个百家问文章标签获取图片地址需传参数(百家问单个问题标签)
+	 * 获取百度推荐新闻需传入参数：网页内容content与新闻类型
+	 * 
+	 * @param content
+	 * @param type
+	 * @return
+	 */
+	public static Vector<News> getBaiDuTuiJianListData(String content, String type) {
+
+		Vector<News> vector = new Vector<News>();
+		// 截取字符串获取正确格式得到json字符串
+		String json = content.substring(content.indexOf("news\":[") + 6, content.lastIndexOf("]") + 1);
+		// 将json字符串转换为json数组
+		JSONArray ja = JSONArray.parseArray(json);
+		// 因为返回的json数据中只有前十条是有数据的所以我们只需获取前十条的json数据就可以了
+		for (int i = 1; i < 10; i++) {
+			JSONObject jo = (JSONObject) ja.get(i);
+			String id = UUID.randomUUID().toString();
+			String title = (String) jo.get("title");
+			String url = (String) jo.get("url");
+			News news = new News(id, title, url, "百度推荐", type, "", "");
+			vector.add(news);
+		}
+		return vector;
+
+	}
+
+	/**
+	 * 根据单个百家问文章标签获取图片地址需传参数(百家问单个问题标签element)
 	 * 
 	 * @param element
 	 *            百家问单个问题标签
@@ -79,7 +109,7 @@ public class BaiJiaJsoupParser {
 	}
 
 	/**
-	 * 此方法用于根据正则表达式匹配出指定时间格式字符串 需传入正则表达式与要匹配的文本信息
+	 * 此方法用于根据正则表达式匹配出指定时间格式字符串 需传入参数：正则表达式regex与要匹配的文本信息info
 	 * 
 	 * @param info
 	 *            文本信息
