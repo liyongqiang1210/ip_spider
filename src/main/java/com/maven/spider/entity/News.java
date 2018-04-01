@@ -16,8 +16,7 @@ public class News implements Serializable {
 	private String newsUrl;
 	private String newsSourceWebsite;
 	private String newsType;
-	private String newsContentId;
-	private String newsPictureId;
+	private String newsPicture;
 	private String newsReleaseTime;
 
 	public String getNewsId() {
@@ -60,12 +59,12 @@ public class News implements Serializable {
 		this.newsType = newsType;
 	}
 
-	public String getNewsPictureId() {
-		return newsPictureId;
+	public String getNewsPicture() {
+		return newsPicture;
 	}
 
-	public void setNewsPictureId(String newsPictureId) {
-		this.newsPictureId = newsPictureId;
+	public void setNewsPicture(String newsPicture) {
+		this.newsPicture = newsPicture;
 	}
 
 	public String getNewsReleaseTime() {
@@ -76,14 +75,6 @@ public class News implements Serializable {
 		this.newsReleaseTime = newsReleaseTime;
 	}
 
-	public String getNewsContentId() {
-		return newsContentId;
-	}
-
-	public void setNewsContentId(String newsContentId) {
-		this.newsContentId = newsContentId;
-	}
-
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
@@ -91,8 +82,8 @@ public class News implements Serializable {
 	@Override
 	public String toString() {
 		return "News [newsId=" + newsId + ", newsTitle=" + newsTitle + ", newsUrl=" + newsUrl + ", newsSourceWebsite="
-				+ newsSourceWebsite + ", newsType=" + newsType + ", newsContentId=" + newsContentId + ", newsPictureId="
-				+ newsPictureId + ", newsReleaseTime=" + newsReleaseTime +  "]";
+				+ newsSourceWebsite + ", newsType=" + newsType + ", newsPicture="
+				+ newsPicture + ", newsReleaseTime=" + newsReleaseTime +  "]";
 	}
 
 	public News(String newsId, String newsTitle, String newsUrl, String newsSourceWebsite, String newsType, String newsReleaseTime) {
@@ -102,6 +93,19 @@ public class News implements Serializable {
 		this.newsUrl = newsUrl;
 		this.newsSourceWebsite = newsSourceWebsite;
 		this.newsType = newsType;
+		this.newsReleaseTime = newsReleaseTime;
+	}
+	
+
+	public News(String newsId, String newsTitle, String newsUrl, String newsSourceWebsite, String newsType,
+			String newsPicture, String newsReleaseTime) {
+		super();
+		this.newsId = newsId;
+		this.newsTitle = newsTitle;
+		this.newsUrl = newsUrl;
+		this.newsSourceWebsite = newsSourceWebsite;
+		this.newsType = newsType;
+		this.newsPicture = newsPicture;
 		this.newsReleaseTime = newsReleaseTime;
 	}
 
