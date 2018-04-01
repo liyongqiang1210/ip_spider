@@ -52,8 +52,8 @@ public class NewsJdbc {
 
 		Connection conn = DBUtil.getConnection();
 		PreparedStatement ps = null;
-		String sql = "insert into news_list(news_id,news_title,news_url,news_source_website,news_type,news_release_time) "
-				+ "values(?,?,?,?,?,?)";
+		String sql = "insert into news_list(news_id,news_title,news_url,news_source_website,news_type,new_picture,news_release_time) "
+				+ "values(?,?,?,?,?,?,?)";
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, news.getNewsId());
@@ -61,7 +61,8 @@ public class NewsJdbc {
 			ps.setString(3, news.getNewsUrl());
 			ps.setString(4, news.getNewsSourceWebsite());
 			ps.setString(5, news.getNewsType());
-			ps.setString(6, news.getNewsReleaseTime());
+			ps.setString(6, news.getNewsPicture());
+			ps.setString(7, news.getNewsReleaseTime());
 			System.out.println(ps.toString());
 			int isSuccess = ps.executeUpdate();
 			if (isSuccess == 1) {
